@@ -1,7 +1,11 @@
+
+
+<script setup>
+import TheHeader from "./components/Header/TheHeader.vue"
+</script>
+
+
 <template>
-    <router-view v-slot="{ Component, route }">
-        <div :key="route.name">
-            <Component :is="Component" />
-        </div>
-    </router-view>
+    <TheHeader />
+    <router-view />
 </template>

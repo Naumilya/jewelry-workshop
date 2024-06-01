@@ -6,8 +6,10 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@iconify/vue": "^4.1.2",
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0.0",
+        "sass": "^1.77.4",
         "vite": "^5.0.0"
     },
     "dependencies": {
