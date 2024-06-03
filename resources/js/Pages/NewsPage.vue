@@ -3,7 +3,7 @@ import NewsGrid from "@/components/News/NewsGrid.vue";
 </script>
 
 <template>
-    <section>
+    <section class="container">
         <h1>Новости</h1>
         <NewsGrid />
     </section>

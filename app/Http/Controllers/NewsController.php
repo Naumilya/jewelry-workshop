@@ -23,10 +23,10 @@ class NewsController extends Controller
     public function store(StoreNewsRequest $request)
     {
         $data = $request->validated();
-        $new = News::create($data);
+        $news = News::create($data);
         return response()->noContent(201)->withHeaders([
             'Location' => route('products.show', [
-                'new' => $new->id,
+                'news' => $news->id,
             ]),
         ]);
 
@@ -35,27 +35,27 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(News $new)
+    public function show(News $news)
     {
-        return response($new);
+        return response($news);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNewsRequest $request, News $new)
+    public function update(UpdateNewsRequest $request, News $news)
     {
         $data = $request->validated();
-        $new->update($data);
+        $news->update($data);
         return response()->noContent(204);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $new)
+    public function destroy(News $news)
     {
-        $new->delete();
+        $news->delete();
         return response()->noContent(204);
     }
 }

@@ -10,7 +10,7 @@ const modules = [Pagination, Autoplay];
 </script>
 
 <template>
-    <section class="hero">
+    <section class="hero container">
         <swiper
             :pagination="{
                 clickable: true,
@@ -88,7 +88,7 @@ const modules = [Pagination, Autoplay];
             </swiper-slide>
         </swiper>
     </section>
-    <section class="about">
+    <section class="about container">
         <img src="/images/icon.svg" alt="icon" />
         <div class="about__text">
             <h2>Немного о нас</h2>
@@ -116,7 +116,7 @@ const modules = [Pagination, Autoplay];
             </p>
         </div>
     </section>
-    <section class="news">
+    <section class="news container">
         <h2>Последнии новости</h2>
         <NewsGrid :countOfNews="4" />
     </section>

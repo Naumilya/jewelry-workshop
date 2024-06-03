@@ -9,6 +9,7 @@ const routes = [
         path: "/news",
         component: () => import("../Pages/NewsPage.vue"),
     },
+    { path: "/news/:id", component: () => import("../Pages/News.vue") },
 ];
 
 export default createRouter({

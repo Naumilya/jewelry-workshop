@@ -5,7 +5,7 @@ import TheHeader from "@/components/Header/TheHeader.vue";
 
 <template>
     <TheHeader />
-    <main class="content container">
+    <main class="content">
         <router-view />
     </main>
     <TheFooter />

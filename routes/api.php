@@ -19,6 +19,7 @@ Route::get("/test-me", function () {
     return 'Hello from Laravel!';
 });
 
+
 Route::prefix('v1')->group(function () {
     Route::apiResource('news', NewsController::class);
 });
