@@ -55,6 +55,7 @@ import { Icon } from "@iconify/vue";
 @import "/resources/css/variables.scss";
 
 .header {
+    z-index: 5;
     padding: 25px 0;
     background: $color-black;
     position: sticky;

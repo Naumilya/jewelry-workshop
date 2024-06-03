@@ -1,11 +1,16 @@
-
-
 <script setup>
-import TheHeader from "./components/Header/TheHeader.vue"
+import TheHeader from "./components/Header/TheHeader.vue";
 </script>
-
 
 <template>
     <TheHeader />
-    <router-view />
+    <main class="main container">
+        <router-view />
+    </main>
 </template>
+
+<style scoped lang="scss">
+.main {
+    margin-top: 75px;
+}
+</style>
