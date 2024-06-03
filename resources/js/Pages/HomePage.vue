@@ -1,7 +1,7 @@
 <script setup>
-import { Swiper, SwiperSlide } from "swiper/vue";
-
+import NewsGrid from "@/components/News/NewsGrid.vue";
 import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/vue";
 
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -118,7 +118,7 @@ const modules = [Pagination, Autoplay];
     </section>
     <section class="news">
         <h2>Последнии новости</h2>
-        <router-link to="/"></router-link>
+        <NewsGrid :countOfNews="4" />
     </section>
 </template>
 
@@ -172,5 +172,65 @@ const modules = [Pagination, Autoplay];
 
 .news {
     margin-top: 110px;
+
+    &__list {
+        margin-top: 37px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 30px;
+        row-gap: 60px;
+    }
+
+    &__item {
+        max-width: 570px;
+    }
+
+    &__image {
+        border-radius: $border-radius;
+        width: 100%;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__created {
+        font-weight: 300;
+    }
+
+    &__image {
+        margin-top: 14px;
+    }
+
+    &__copyright {
+        margin-top: 20px;
+        font-family: Raleway, sans-serif;
+    }
+
+    &__theme {
+        font-size: 24px;
+        font-weight: normal;
+        max-width: max-content;
+        color: $color-black;
+        border-radius: $border-radius-small;
+        padding: 4px 25px;
+        background: $color-gold;
+    }
+
+    &__description {
+        margin-top: 20px;
+        font-family: Raleway;
+    }
+
+    &__button {
+        font-family: Raleway;
+        margin-top: 20px;
+        display: inline-block;
+        color: $color-gold;
+        text-decoration: none;
+        font-weight: 300;
+    }
 }
 </style>

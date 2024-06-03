@@ -1,16 +1,18 @@
 <script setup>
-import TheHeader from "./components/Header/TheHeader.vue";
+import TheFooter from "@/components/Footer/TheFooter.vue";
+import TheHeader from "@/components/Header/TheHeader.vue";
 </script>
 
 <template>
     <TheHeader />
-    <main class="main container">
+    <main class="content container">
         <router-view />
     </main>
+    <TheFooter />
 </template>
 
 <style scoped lang="scss">
-.main {
+.content {
     margin-top: 75px;
 }
 </style>

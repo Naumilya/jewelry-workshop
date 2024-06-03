@@ -1,11 +1,11 @@
 <script setup>
-import TheLogo from "@/components/TheLogo.vue";
-import { Icon } from "@iconify/vue";
+import TheLogo from "@/components/TheLogo.vue"
+import { Icon } from "@iconify/vue"
 </script>
 
 <template>
     <header class="header">
-        <nav class="header__navigation container">
+        <nav class="header__navigation navigation container">
             <TheLogo />
             <ul class="header__menu menu">
                 <li>
@@ -60,30 +60,5 @@ import { Icon } from "@iconify/vue";
     background: $color-black;
     position: sticky;
     top: 0;
-    .header__navigation {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-}
-
-.menu {
-    display: flex;
-    align-items: center;
-    gap: 38px;
-    list-style: none;
-    &__link {
-        color: $color-white;
-        text-decoration: none;
-
-        &_icon {
-            font-size: 25px;
-        }
-
-        &:hover {
-            color: $color-gold;
-            transition: $transition-fast;
-        }
-    }
 }
 </style>
