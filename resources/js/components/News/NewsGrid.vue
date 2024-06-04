@@ -8,6 +8,11 @@ const props = defineProps({
         default: 10,
         required: false,
     },
+    descriptionLength: {
+        type: Number,
+        default: 100,
+        required: false,
+    },
 });
 
 const newsList = ref([]);
@@ -53,7 +58,12 @@ function dateFormat(date) {
                     {{ news.copyright }}
                 </p>
                 <p class="news__description">
-                    {{ news.description }}
+                    {{ news.description.substring(0, props.descriptionLength)
+                    }}{{
+                        news.description.length > props.descriptionLength
+                            ? "..."
+                            : ""
+                    }}
                 </p>
                 <router-link class="news__button" :to="`/news/${news.id}`">
                     Читать далее

@@ -231,6 +231,7 @@ const modules = [Pagination, Autoplay];
         color: $color-gold;
         text-decoration: none;
         font-weight: 300;
+        font-size: 14px;
     }
 }
 </style>
