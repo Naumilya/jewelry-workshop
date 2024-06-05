@@ -66,6 +66,10 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
     .socials {
         display: flex;
         gap: 30px;
+
+        *:hover {
+            color: $color-gold;
+        }
     }
 
     h2 {

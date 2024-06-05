@@ -19,6 +19,15 @@ const routes = [
         path: "/custom-jewelry",
         component: () => import("../Pages/CustomJewelryPage.vue"),
     },
+
+    {
+        path: "/cart",
+        component: () => import("../Pages/CartPage.vue"),
+    },
+    {
+        path: "/deferred",
+        component: () => import("../Pages/DeferredPage.vue"),
+    },
 ];
 
 export default createRouter({

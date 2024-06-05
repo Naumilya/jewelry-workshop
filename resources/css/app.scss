@@ -85,3 +85,11 @@ body {
     background: transparent;
     color: $color-gold;
 }
+
+.product-grid {
+    margin-top: 40px;
+    display: flex;
+    column-gap: 30px;
+    row-gap: 75px;
+    flex-wrap: wrap;
+}
