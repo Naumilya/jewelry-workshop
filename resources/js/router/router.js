@@ -11,7 +11,14 @@ const routes = [
     },
     { path: "/news/:id", component: () => import("../Pages/News.vue") },
     { path: "/catalog", component: () => import("../Pages/CatalogPage.vue") },
-    { path: "/contacts", component: () => import("../Pages/ContactsPage.vue") },
+    {
+        path: "/contacts",
+        component: () => import("../Pages/ContactsPage.vue"),
+    },
+    {
+        path: "/custom-jewelry",
+        component: () => import("../Pages/CustomJewelryPage.vue"),
+    },
 ];
 
 export default createRouter({

@@ -62,3 +62,26 @@ body {
         }
     }
 }
+
+.button {
+    cursor: pointer;
+    padding: 13px 18px;
+    text-align: center;
+    font-family: Roboto;
+    font-weight: 800;
+    font-size: 16px;
+    background: $color-gold;
+    border: none;
+    outline: none;
+    border-radius: $border-radius-small;
+}
+
+.button_white {
+    color: $color-black;
+    background: $color-white;
+}
+
+.button_transparent {
+    background: transparent;
+    color: $color-gold;
+}
