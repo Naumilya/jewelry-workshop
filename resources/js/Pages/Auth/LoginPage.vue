@@ -30,7 +30,9 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
                 <a href=""><Icon icon="ion:logo-vk"></Icon></a>
             </div>
             <div class="form__item">
-                <router-link to="/login">Не зарегистрированы?</router-link>
+                <router-link to="/registration"
+                    >Не зарегистрированы?</router-link
+                >
                 <router-link to="/restore">Забыли пароль?</router-link>
             </div>
         </div>
