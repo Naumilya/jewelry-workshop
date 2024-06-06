@@ -7,41 +7,57 @@
             Если у вас есть идеи или вам надо отремонтировать вашу вещь,
             оставьте вашу заявку здесь
         </p>
-        <form action="post" class="custom-jewelry__form form">
-            <div class="form__item">
-                <label for="name" class="form__label">Полное имя:</label>
+        <form action="post" class="custom-jewelry-form custom-jewelry__form">
+            <div class="custom-jewelry-form__item">
+                <label for="name" class="custom-jewelry-form__label"
+                    >Полное имя:</label
+                >
                 <input
-                    class="form__input"
+                    class="custom-jewelry-form__input"
                     type="text"
                     id="name"
                     placeholder="Ярослава Щепурушвили Андреевна"
                 />
             </div>
-            <div class="form__item">
-                <label for="email" class="form__label">Ваша почта:</label>
+            <div class="custom-jewelry-form__item">
+                <label for="email" class="custom-jewelry-form__label"
+                    >Ваша почта:</label
+                >
                 <input
-                    class="form__input"
+                    class="custom-jewelry-form__input"
                     type="email"
                     id="email"
                     placeholder="yaroslavna@gmail.com"
                 />
             </div>
-            <div class="form__item">
-                <label for="type" class="form__label">Тип обращение:</label>
-                <select name="type" id="type" class="form__input">
+            <div class="custom-jewelry-form__item">
+                <label for="type" class="custom-jewelry-form__label"
+                    >Тип обращение:</label
+                >
+                <select
+                    name="type"
+                    id="type"
+                    class="custom-jewelry-form__input"
+                >
                     <option value="repair">Ремонт</option>
                     <option value="custom">Украшения на заказ</option>
                 </select>
             </div>
-            <div class="form__item form__item_text-area">
-                <label for="massage" class="form__label">Текст обращения</label>
+            <div
+                class="custom-jewelry-form__item custom-jewelry-form__item_text-area"
+            >
+                <label for="massage" class="custom-jewelry-form__label"
+                    >Текст обращения</label
+                >
                 <textarea
-                    class="form__text-area"
+                    class="custom-jewelry-form__text-area"
                     name="massage"
                     id="massage"
                 ></textarea>
             </div>
-            <div class="form__item form__item_buttons">
+            <div
+                class="custom-jewelry-form__item custom-jewelry-form__item_buttons"
+            >
                 <label for="image_uploads" class="button button_white"
                     >Прикрепить файл</label
                 >
@@ -70,7 +86,7 @@
     }
 }
 
-.form {
+.custom-jewelry-form {
     display: flex;
     flex-direction: column;
     gap: 30px;

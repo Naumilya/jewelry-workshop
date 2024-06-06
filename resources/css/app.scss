@@ -43,6 +43,14 @@ body {
     align-items: center;
 }
 
+.product-grid {
+    margin-top: 40px;
+    display: flex;
+    column-gap: 30px;
+    row-gap: 75px;
+    flex-wrap: wrap;
+}
+
 .menu {
     display: flex;
     align-items: center;
@@ -86,10 +94,65 @@ body {
     color: $color-gold;
 }
 
-.product-grid {
-    margin-top: 40px;
+.form {
+    margin-top: 30px;
     display: flex;
-    column-gap: 30px;
-    row-gap: 75px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
+    width: 370px;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    &__label {
+        font-family: Raleway;
+        font-size: 24px;
+    }
+
+    &__input {
+        background-color: transparent;
+        color: $color-white;
+        font-size: 16px;
+        outline: none;
+        border: 1px solid rgba($color-gray, 0.3);
+        border-radius: $border-radius-small;
+        padding: 10px 12px;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .form__item {
+            text-align: right;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        a {
+            color: $color-white;
+            text-decoration: none;
+        }
+    }
+
+    &__socials {
+        p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        a {
+            font-size: 25px;
+            color: $color-white;
+            text-decoration: none;
+        }
+
+        a + a {
+            margin-left: 10px;
+        }
+    }
 }

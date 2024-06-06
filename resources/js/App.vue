@@ -1,14 +1,15 @@
 <script setup>
-import TheFooter from "@/components/Footer/TheFooter.vue";
-import TheHeader from "@/components/Header/TheHeader.vue";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const layout = computed(() => route.meta.layout);
 </script>
 
 <template>
-    <TheHeader />
-    <main class="content">
+    <component :is="layout">
         <router-view />
-    </main>
-    <TheFooter />
+    </component>
 </template>
 
 <style scoped lang="scss">

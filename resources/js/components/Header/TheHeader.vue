@@ -1,6 +1,6 @@
 <script setup>
-import TheLogo from "@/components/TheLogo.vue"
-import { Icon } from "@iconify/vue"
+import TheLogo from "@/components/TheLogo.vue";
+import { Icon } from "@iconify/vue";
 </script>
 
 <template>
@@ -42,7 +42,10 @@ import { Icon } from "@iconify/vue"
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/auth" class="menu__link menu__link_icon">
+                    <router-link
+                        to="/registration"
+                        class="menu__link menu__link_icon"
+                    >
                         <Icon icon="ion:enter-outline" />
                     </router-link>
                 </li>
