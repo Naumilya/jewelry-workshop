@@ -1,10 +1,31 @@
 <script setup>
-import { Icon } from "@iconify/vue/dist/iconify.js";
+import { Icon } from "@iconify/vue/dist/iconify.js"
+
+import axios from "axios"
+import { ref } from "vue"
+import { useRouter } from "vue-router"
+
+const email = ref("");
+const password = ref("");
+
+const router = useRouter();
+const login = async () => {
+    try {
+        const response = await axios.post("/api/login", {
+            email: email.value,
+            password: password.value,
+        });
+        console.log(response.data);
+        router.push("/");
+    } catch (error) {
+        console.error(error);
+    }
+};
 </script>
 
 <template>
     <h2>Войти в аккаунт</h2>
-    <form action="post" class="form">
+    <form @submit.prevent="login" class="form">
         <div class="form__item">
             <label class="form__label" for="email">Почта</label>
             <input
@@ -12,6 +33,7 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
                 class="form__input"
                 type="email"
                 placeholder="Почта"
+                v-model="email"
             />
         </div>
         <div class="form__item">
@@ -21,6 +43,7 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
                 class="form__input"
                 type="password"
                 placeholder="Пароль"
+                v-model="password"
             />
         </div>
         <div class="form__actions">

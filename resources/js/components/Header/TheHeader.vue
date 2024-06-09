@@ -41,7 +41,15 @@ import { Icon } from "@iconify/vue";
                         <Icon icon="ion:basket" />
                     </router-link>
                 </li>
-                <li>
+                <li v-if="false">
+                    <router-link
+                        to="/profile"
+                        class="menu__link menu__link_icon"
+                    >
+                        <Icon icon="ion:person-circle" />
+                    </router-link>
+                </li>
+                <li v-else>
                     <router-link
                         to="/registration"
                         class="menu__link menu__link_icon"

@@ -1,10 +1,32 @@
 <script setup>
 import { Icon } from "@iconify/vue/dist/iconify.js";
+import axios from "axios";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+const name = ref("");
+const email = ref("");
+const password = ref("");
+const confirmPassword = ref("");
+const router = useRouter();
+const register = async () => {
+    try {
+        const response = await axios.post("/api/register", {
+            name: name.value,
+            email: email.value,
+            password: password.value,
+            password_confirmation: confirmPassword.value,
+        });
+        console.log(response.data);
+        router.push("/");
+    } catch (error) {
+        console.error(error);
+    }
+};
 </script>
 
 <template>
     <h2>Регистрация</h2>
-    <form action="post" class="form">
+    <form @submit.prevent="register" class="form">
         <div class="form__item">
             <label class="form__label" for="name">Полное имя</label>
             <input
@@ -12,6 +34,7 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
                 id="name"
                 type="text"
                 placeholder="Полное имя"
+                v-model="name"
             />
         </div>
         <div class="form__item">
@@ -21,6 +44,7 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
                 class="form__input"
                 type="email"
                 placeholder="Почта"
+                v-model="email"
             />
         </div>
         <div class="form__item">
@@ -30,6 +54,7 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
                 class="form__input"
                 type="password"
                 placeholder="Пароль"
+                v-model="password"
             />
         </div>
         <div class="form__item">
@@ -41,6 +66,7 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
                 type="password"
                 class="form__input"
                 placeholder="Подтверждение пароля"
+                v-model="confirmPassword"
             />
         </div>
         <div class="form__actions">
