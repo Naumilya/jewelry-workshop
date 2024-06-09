@@ -18,7 +18,7 @@ class NewsFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(3),
-            'theme' => $this->faker->word,
+            'theme' => $this->faker->unique()->word,
             'copyright' => $this->faker->company,
             'description' => $this->faker->paragraph(2),
             'image_path' => $this->faker->imageUrl,

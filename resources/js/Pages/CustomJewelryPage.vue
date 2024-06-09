@@ -1,4 +1,9 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+import { useUserStore } from "@/stores/user.store.js";
+const userStore = useUserStore();
+</script>
 
 <template>
     <section class="custom-jewelry container">
@@ -17,6 +22,7 @@
                     type="text"
                     id="name"
                     placeholder="Ярослава Щепурушвили Андреевна"
+                    :value="userStore.name"
                 />
             </div>
             <div class="custom-jewelry-form__item">
@@ -28,6 +34,7 @@
                     type="email"
                     id="email"
                     placeholder="yaroslavna@gmail.com"
+                    :value="userStore.email"
                 />
             </div>
             <div class="custom-jewelry-form__item">

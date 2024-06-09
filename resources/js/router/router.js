@@ -90,6 +90,13 @@ const routes = [
             layout: DefaultLayout,
         },
     },
+    {
+        path: "/:pathMatch(.*)*",
+        component: () => import("../Pages/NotFoundPage.vue"),
+        meta: {
+            layout: DefaultLayout,
+        },
+    },
 ];
 
 export default createRouter({

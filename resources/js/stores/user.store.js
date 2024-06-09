@@ -30,6 +30,7 @@ export const useUserStore = defineStore("user", {
             localStorage.removeItem("token");
             localStorage.removeItem("createdAt");
         },
+        // ! Fixme
         getFormattedDate() {
             if (!this.createdAt) return null;
             const day = this.createdAt.getDate().toString().padStart(2, "0");

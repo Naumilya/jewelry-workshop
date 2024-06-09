@@ -32,7 +32,7 @@ class RegisterController extends Controller
         $success['token'] = $user->createToken('MyApp')->accessToken;
         $success['name'] = $user->name;
         $success['email'] = $user->email;
-        $success['createdAt'] = $user->created_at;
+        $success['created_at'] = $user->created_at;
 
         return $this->sendResponse($success, 'User register successfully.');
     }
