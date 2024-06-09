@@ -1,6 +1,9 @@
 <script setup>
 import TheLogo from "@/components/TheLogo.vue";
+import { useUserStore } from "@/stores/user.store.js";
 import { Icon } from "@iconify/vue";
+
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -41,20 +44,18 @@ import { Icon } from "@iconify/vue";
                         <Icon icon="ion:basket" />
                     </router-link>
                 </li>
-                <li v-if="false">
+                <li>
                     <router-link
-                        to="/profile"
+                        :to="userStore.token ? '/profile' : '/registration'"
                         class="menu__link menu__link_icon"
                     >
-                        <Icon icon="ion:person-circle" />
-                    </router-link>
-                </li>
-                <li v-else>
-                    <router-link
-                        to="/registration"
-                        class="menu__link menu__link_icon"
-                    >
-                        <Icon icon="ion:enter-outline" />
+                        <Icon
+                            :icon="
+                                userStore.token
+                                    ? 'ion:person-circle'
+                                    : 'ion:enter-outline'
+                            "
+                        />
                     </router-link>
                 </li>
             </ul>

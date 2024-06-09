@@ -83,6 +83,13 @@ const routes = [
             layout: AuthLayout,
         },
     },
+    {
+        path: "/profile",
+        component: () => import("../Pages/ProfilePage.vue"),
+        meta: {
+            layout: DefaultLayout,
+        },
+    },
 ];
 
 export default createRouter({

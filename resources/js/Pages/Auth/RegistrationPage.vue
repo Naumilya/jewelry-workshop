@@ -1,13 +1,18 @@
 <script setup>
+import { useUserStore } from "@/stores/user.store.js";
 import { Icon } from "@iconify/vue/dist/iconify.js";
 import axios from "axios";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+
+const userStore = useUserStore();
+
 const name = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const router = useRouter();
+
 const register = async () => {
     try {
         const response = await axios.post("/api/register", {
@@ -17,11 +22,18 @@ const register = async () => {
             password_confirmation: confirmPassword.value,
         });
         console.log(response.data);
+        userStore.setUser(response.data.data);
         router.push("/");
     } catch (error) {
         console.error(error);
     }
 };
+
+onMounted(() => {
+    if (userStore.token) {
+        router.push("/profile");
+    }
+});
 </script>
 
 <template>

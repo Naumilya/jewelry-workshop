@@ -1,9 +1,12 @@
 <script setup>
-import { Icon } from "@iconify/vue/dist/iconify.js"
+import { useUserStore } from "@/stores/user.store.js";
+import { Icon } from "@iconify/vue/dist/iconify.js";
 
-import axios from "axios"
-import { ref } from "vue"
-import { useRouter } from "vue-router"
+import axios from "axios";
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+
+const userStore = useUserStore();
 
 const email = ref("");
 const password = ref("");
@@ -16,11 +19,18 @@ const login = async () => {
             password: password.value,
         });
         console.log(response.data);
+        userStore.setUser(response.data.data);
         router.push("/");
     } catch (error) {
         console.error(error);
     }
 };
+
+onMounted(() => {
+    if (userStore.token) {
+        router.push("/profile");
+    }
+});
 </script>
 
 <template>
