@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\NewsController;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -32,4 +33,7 @@ Route::post('login', [RegisterController::class, 'login']);
 Route::middleware('auth:api')->group((function () {
     Route::resource('products', ProductController::class);
 }));
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/catalog/{name}', [CategoryController::class, 'getByCategory']);
 

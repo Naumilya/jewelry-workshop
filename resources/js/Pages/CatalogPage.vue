@@ -1,123 +1,57 @@
+<script setup>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+
+const categories = ref([]);
+
+onMounted(async () => {
+    const response = await axios.get("/api/categories");
+    categories.value = response.data;
+});
+
+const getItemClass = (index) => {
+    const smallIndexes = [2, 3, 4, 5, 7, 8];
+    return smallIndexes.includes(index) ? "catalog__item_small" : "";
+};
+
+const getGridClass = (index) => {
+    const gridClasses = {
+        0: "div1",
+        1: "div2",
+        2: "div3",
+        3: "div4",
+        4: "div5",
+        5: "div6",
+        6: "div7",
+        7: "div8",
+        8: "div9",
+        9: "div10",
+    };
+    return gridClasses[index];
+};
+</script>
+
 <template>
     <section class="catalog container">
         <h1>Каталог</h1>
         <div class="catalog__grid">
-            <router-link to="/catalog/category" class="catalog__item div1">
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Кольца</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/rings.jpg"
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
-            <router-link to="/catalog/category" class="catalog__item div2">
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Серьги</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/earrings.jpg"
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
             <router-link
-                to="/catalog/category"
-                class="catalog__item catalog__item_small div3"
+                v-for="(category, index) in categories"
+                :key="category.id"
+                :to="`/catalog/${category.name}`"
+                :class="[
+                    'catalog__item',
+                    getItemClass(index),
+                    getGridClass(index),
+                ]"
             >
                 <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Цепи</h2>
+                    <h2 class="catalog__category-title">
+                        {{ category.name_ru }}
+                    </h2>
                     <img
                         class="catalog__category-image"
-                        src="/images/categories/chains.png
-                        "
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
-            <router-link
-                to="/catalog/category"
-                class="catalog__item catalog__item_small div4"
-            >
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Брошки</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/brooches.png
-                        "
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
-            <router-link
-                to="/catalog/category"
-                class="catalog__item catalog__item_small div5"
-            >
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Подвески</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/pendants.png"
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
-            <router-link
-                to="/catalog/category"
-                class="catalog__item catalog__item_small div6"
-            >
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Браслеты</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/bracelets.png"
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
-            <router-link to="/catalog/category" class="catalog__item div7">
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Колье</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/necklaces.jpg"
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
-            <router-link
-                to="/catalog/category"
-                class="catalog__item catalog__item_small div8"
-            >
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Религия</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/religions.png"
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
-            <router-link
-                to="/catalog/category"
-                class="catalog__item catalog__item_small div9"
-            >
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Сувениры</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/souvenirs.png"
-                        alt="categories"
-                    />
-                </div>
-            </router-link>
-            <router-link to="/catalog/category" class="catalog__item div10">
-                <div class="catalog__item-inner">
-                    <h2 class="catalog__category-title">Часы</h2>
-                    <img
-                        class="catalog__category-image"
-                        src="/images/categories/clocks.png"
+                        :src="`/images/categories/${category.name}.png`"
                         alt="categories"
                     />
                 </div>
@@ -125,8 +59,6 @@
         </div>
     </section>
 </template>
-
-<script setup></script>
 
 <style lang="scss" scoped>
 @import "/resources/css/variables.scss";

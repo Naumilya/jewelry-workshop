@@ -1,12 +1,19 @@
 <script setup>
 import { Icon } from "@iconify/vue/dist/iconify.js";
+import { defineProps } from "vue";
+defineProps({
+    product: {
+        name: String,
+        detail: String,
+    },
+});
 </script>
 
 <template>
     <div class="card-product">
         <img class="card-product__image" src="/images/products/ring1.png" />
         <div class="card-product__row">
-            <h4 class="card-product__title">Кольцо</h4>
+            <h4 class="card-product__title">{{ product.name }}</h4>
         </div>
         <div class="card-product__row">
             <span class="card-product__price">12 700 р.</span>
@@ -22,6 +29,7 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
 @import "/resources/css/variables.scss";
 
 .card-product {
+    max-width: 270px;
     &__image {
         background-color: $color-gray;
         padding: 7px 0;
@@ -42,7 +50,7 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
     &__title {
         margin-top: 12px;
         font-weight: 300;
-        font-size: 24px;
+        font-size: 16px;
     }
     &__price {
         font-family: Raleway;

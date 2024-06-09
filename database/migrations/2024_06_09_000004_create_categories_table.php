@@ -12,9 +12,13 @@ return new class extends Migration {
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->enum('name', ['rings', 'earrings', 'chains', 'brooches', 'pendants', 'bracelets', 'necklaces', 'religions', 'souvenirs', 'clocks'])->default('rings');
+            $table->string('name');
+            $table->string('name_ru');
             $table->text('description');
             $table->timestamps();
+
+            $table->unique('name');
+            $table->unique('name_ru');
         });
     }
 

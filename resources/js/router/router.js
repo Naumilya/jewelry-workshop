@@ -32,6 +32,13 @@ const routes = [
         },
     },
     {
+        path: "/catalog/:name",
+        component: () => import("../Pages/CategoryPage.vue"),
+        meta: {
+            layout: DefaultLayout,
+        },
+    },
+    {
         path: "/contacts",
         component: () => import("../Pages/ContactsPage.vue"),
         meta: {

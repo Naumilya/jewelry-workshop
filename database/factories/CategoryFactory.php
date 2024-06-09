@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategoryFactory extends Factory
 {
+    private $index = 0;
+
     /**
      * Define the model's default state.
      *
@@ -18,11 +20,25 @@ class CategoryFactory extends Factory
     {
         $faker = $this->faker;
 
-        $names = ['rings', 'earrings', 'chains', 'brooches', 'pendants', 'bracelets', 'necklaces', 'religions', 'souvenirs', 'clocks'];
-        $name = $faker->unique()->randomElement($names);
+        $names = [
+            'rings' => 'кольца',
+            'earrings' => 'серьги',
+            'chains' => 'цепи',
+            'brooches' => 'броши',
+            'pendants' => 'подвески',
+            'bracelets' => 'браслеты',
+            'necklaces' => 'ожерелья',
+            'religions' => 'религии',
+            'souvenirs' => 'сувениры',
+            'clocks' => 'часы',
+        ];
+
+        $key = array_keys($names)[$this->index];
+        $this->index++;
 
         return [
-            'name' => $name,
+            'name' => $key,
+            'name_ru' => $names[$key],
             'description' => $faker->paragraph,
         ];
     }
