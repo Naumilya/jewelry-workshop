@@ -1,10 +1,13 @@
 <script setup>
+import { useCartStore } from "@/stores/cart.store.js";
 import { Icon } from "@iconify/vue/dist/iconify.js";
 import axios from "axios";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+
 const product = ref(null);
 const route = useRoute();
+const cartStore = useCartStore();
 
 onMounted(async () => {
     const productId = parseInt(route.params.id);
@@ -18,6 +21,19 @@ onMounted(async () => {
         console.error(error);
     }
 });
+
+function toggleCart() {
+    cartStore.toggleCart(product.value);
+}
+
+function toggleDeferredOrder() {
+    cartStore.toggleDeferredOrder(product.value);
+}
+
+const isInCart = computed(() => cartStore.isInCart(product.value));
+const isInDeferredOrder = computed(() =>
+    cartStore.isInDeferredOrder(product.value)
+);
 </script>
 
 <template>
@@ -33,8 +49,16 @@ onMounted(async () => {
                         <h2>{{ product.cost }} р.</h2>
                     </div>
                     <div class="product__icon">
-                        <Icon icon="ion:heart-circle" />
-                        <Icon icon="ion:basket" />
+                        <Icon
+                            icon="ion:heart-circle"
+                            @click="toggleDeferredOrder"
+                            :class="{ active: isInDeferredOrder }"
+                        />
+                        <Icon
+                            icon="ion:basket"
+                            @click="toggleCart"
+                            :class="{ active: isInCart }"
+                        />
                     </div>
                 </div>
             </div>
@@ -50,6 +74,10 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 @import "/resources/css/variables.scss";
+
+.active {
+    color: $color-gold;
+}
 
 .product {
     display: flex;
