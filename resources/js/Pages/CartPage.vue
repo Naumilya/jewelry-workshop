@@ -19,15 +19,6 @@ const totalSum = computed(() => {
 });
 
 const isAuthorized = computed(() => userStore.token !== null);
-
-const handleOrder = async () => {
-    if (!isAuthorized.value) {
-        router.push("/login");
-        return;
-    }
-    // код для оформления заказа
-    console.log("можно оформить");
-};
 </script>
 
 <template>
@@ -45,9 +36,12 @@ const handleOrder = async () => {
             </div>
             <div class="cart-summary">
                 <h3>Общая сумма заказа: {{ totalSum }} руб.</h3>
-                <button class="button" @click="handleOrder">
+                <router-link v-if="isAuthorized" class="button" to="/payment">
                     Оформить заказ
-                </button>
+                </router-link>
+                <router-link v-else class="button" to="/login">
+                    Войдите в аккаунт
+                </router-link>
             </div>
         </div>
     </section>

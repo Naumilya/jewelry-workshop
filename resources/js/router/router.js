@@ -1,7 +1,7 @@
+import { useUserStore } from "@/stores/user.store.js";
 import { createRouter, createWebHistory } from "vue-router";
 import AuthLayout from "../layouts/AuthLayout.vue";
 import DefaultLayout from "../layouts/DefaultLayout.vue";
-
 const routes = [
     {
         path: "/",
@@ -102,6 +102,7 @@ const routes = [
         component: () => import("../Pages/ProfilePage.vue"),
         meta: {
             layout: DefaultLayout,
+            requiresAuth: true,
         },
     },
     {
@@ -111,9 +112,28 @@ const routes = [
             layout: DefaultLayout,
         },
     },
+    {
+        path: "/payment",
+        component: () => import("../Pages/PaymentPage.vue"),
+        meta: {
+            layout: DefaultLayout,
+            requiresAuth: true,
+        },
+    },
 ];
 
-export default createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
+router.beforeEach((to, from, next) => {
+    const userStore = useUserStore();
+    if (to.meta.requiresAuth && !userStore.token) {
+        next("/login");
+    } else {
+        next();
+    }
+});
+
+export default router;
