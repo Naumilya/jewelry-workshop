@@ -31,6 +31,7 @@ class CategoryController extends Controller
         })->get();
 
         return response()->json([
+            'category_route' => $category->name,
             'category_title' => $category->name_ru,
             'products' => $products
         ]);

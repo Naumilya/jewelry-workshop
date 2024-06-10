@@ -30,10 +30,11 @@ Route::prefix('v1')->group(function () {
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
-Route::middleware('auth:api')->group((function () {
-    Route::resource('products', ProductController::class);
-}));
+// Route::middleware('auth:api')->group((function () {
+//     Route::resource('products', ProductController::class);
+// }));
 
+Route::get('/product/{id}', [ProductController::class, 'show']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/catalog/{name}', [CategoryController::class, 'getByCategory']);
 

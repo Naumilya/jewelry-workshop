@@ -25,7 +25,8 @@ class ProductController extends Controller
         $validator = Validator::make($input, [
             'name' => 'required',
             'detail' => 'required',
-
+            'image_path' => 'required|url',
+            'cost' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->sendError('Validation error.', $validator->errors());

@@ -39,6 +39,13 @@ const routes = [
         },
     },
     {
+        path: "/catalog/:name/:id",
+        component: () => import("../Pages/ProductPage.vue"),
+        meta: {
+            layout: DefaultLayout,
+        },
+    },
+    {
         path: "/contacts",
         component: () => import("../Pages/ContactsPage.vue"),
         meta: {

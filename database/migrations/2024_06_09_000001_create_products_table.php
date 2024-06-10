@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->text('detail');
+            $table->decimal('cost', 10, 2);
+            $table->string('image_path');
             $table->timestamps();
         });
     }

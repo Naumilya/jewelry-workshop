@@ -18,6 +18,18 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $images = [
+            'ring1.png',
+            'ring2.png',
+            'ring3.png',
+            'necklaces1.png',
+            'necklaces1.png',
+            'necklaces2.png',
+            'bracelets1.png',
+            'bracelets2.png'
+            // add more image names here
+        ];
+
         $faker = $this->faker;
         return [
             'name' => $faker->randomElement([ // Rings
@@ -71,6 +83,8 @@ class ProductFactory extends Factory
                 'Часы с сапфиром',
                 'Часы с рубином и бриллиантами'
             ]),
+            'cost' => $this->faker->randomFloat(1, 100, 2),
+            'image_path' => '/images/products/' . $this->faker->randomElement($images),
             'detail' => $faker->paragraph,
         ];
     }
