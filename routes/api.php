@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\PaymentController;
+use App\Http\Controllers\API\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +36,15 @@ Route::post('login', [RegisterController::class, 'login']);
 //     Route::resource('products', ProductController::class);
 // }));
 
+
 Route::post('/payment', [PaymentController::class, 'processPayment']);
 Route::get('/product/{id}', [ProductController::class, 'show']);
+//categories
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/catalog/{name}', [CategoryController::class, 'getByCategory']);
+// reset password
+
+
+Route::post('password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::post('password/reset', [PasswordResetController::class, 'resetPassword'])->name('password.update');
 

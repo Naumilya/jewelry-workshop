@@ -160,4 +160,16 @@ body {
             margin-left: 10px;
         }
     }
+
+    &__error {
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
+
+    &__success {
+        color: green;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
 }

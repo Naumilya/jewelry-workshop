@@ -119,10 +119,4 @@ onMounted(() => {
     </form>
 </template>
 
-<style lang="scss" scoped>
-.form__error {
-    color: red;
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-}
-</style>
+<style lang="scss" scoped></style>
