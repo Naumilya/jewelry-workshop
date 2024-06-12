@@ -34,7 +34,7 @@ class RegisterController extends Controller
         $success['email'] = $user->email;
         $success['created_at'] = $user->created_at;
 
-        return $this->sendResponse($success, 'User register successfully.');
+        return $this->sendResponse($success, 'Вы успешно зарегистрировались.');
     }
 
     public function login(Request $request): JsonResponse
@@ -42,7 +42,7 @@ class RegisterController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             if (!$user) {
-                return $this->sendError('User not authenticated.', ['error' => 'User not authenticated.']);
+                return $this->sendError('Пользователь не авторизован.', ['error' => 'User not authenticated.']);
             }
             if (!method_exists($user, 'createToken')) {
                 return $this->sendError('Method createToken does not exist.', ['error' => 'Method createToken does not exist.']);
@@ -52,9 +52,9 @@ class RegisterController extends Controller
             $success['email'] = $user->email;
             $success['created_at'] = $user->created_at;
 
-            return $this->sendResponse($success, 'User login successfully.');
+            return $this->sendResponse($success, 'Вы успешно залогинились.');
         } else {
-            return $this->sendError('Unauthorized login wrong.', ['error' => 'Unauthorized.']);
+            return $this->sendError('Вы не авторизовались, неправильная почта или пароль.', ['error' => 'Unauthorized.']);
         }
     }
 }

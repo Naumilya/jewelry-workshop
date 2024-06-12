@@ -11,17 +11,60 @@ const userStore = useUserStore();
 const email = ref("");
 const password = ref("");
 
+const emailError = ref("");
+const passwordError = ref("");
+const serverError = ref("");
+
 const router = useRouter();
+
+const validate = () => {
+    emailError.value = "";
+    passwordError.value = "";
+
+    let isValid = true;
+
+    if (!email.value) {
+        emailError.value = "Пожалуйста, введите почту.";
+        isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email.value)) {
+        emailError.value = "Пожалуйста, введите правильный формат почты.";
+        isValid = false;
+    }
+
+    if (!password.value) {
+        passwordError.value = "Пожалуйста, введите пароль.";
+        isValid = false;
+    } else if (password.value.length < 6) {
+        passwordError.value = "Пароль должен содержать не менее 6 символов.";
+        isValid = false;
+    }
+
+    return isValid;
+};
+
 const login = async () => {
+    if (!validate()) {
+        return;
+    }
+
+    serverError.value = "";
+
     try {
         const response = await axios.post("/api/login", {
             email: email.value,
             password: password.value,
         });
-        console.log(response.data);
-        userStore.setUser(response.data.data);
-        router.push("/");
+
+        if (response.data.success) {
+            userStore.setUser(response.data.data);
+            router.push("/");
+        } else {
+            serverError.value =
+                response.data.message ||
+                "Произошла ошибка. Попробуйте еще раз.";
+        }
     } catch (error) {
+        serverError.value = "Произошла ошибка. Попробуйте еще раз.";
         console.error(error);
     }
 };
@@ -45,6 +88,7 @@ onMounted(() => {
                 placeholder="Почта"
                 v-model="email"
             />
+            <p class="form__error" v-if="emailError">{{ emailError }}</p>
         </div>
         <div class="form__item">
             <label class="form__label" for="password">Пароль</label>
@@ -55,7 +99,9 @@ onMounted(() => {
                 placeholder="Пароль"
                 v-model="password"
             />
+            <p class="form__error" v-if="passwordError">{{ passwordError }}</p>
         </div>
+        <p class="form__error" v-if="serverError">{{ serverError }}</p>
         <div class="form__actions">
             <div class="form__socials">
                 <p>Регистрация с помощью</p>
@@ -73,4 +119,10 @@ onMounted(() => {
     </form>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form__error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+</style>
