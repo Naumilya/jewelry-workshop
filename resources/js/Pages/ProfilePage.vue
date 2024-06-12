@@ -36,11 +36,28 @@ onMounted(() => {
     </section>
     <section class="orders container">
         <h2>Мои заказы</h2>
-        <div class="orders__empty" v-if="true">
+        <div class="orders__empty" v-if="userStore.orders.length === 0">
             <span> Здесь пока что ничего нет... </span>
             <router-link to="/catalog">Перейти в Каталог</router-link>
         </div>
-        <div class="orders__list" v-else></div>
+        <div class="orders__list" v-else>
+            <div
+                v-for="order in userStore.orders"
+                :key="order.id"
+                class="order"
+            >
+                <h3>Номер заказа: {{ order.id }}</h3>
+                <p>
+                    Дата заказа: {{ new Date(order.date).toLocaleDateString() }}
+                </p>
+                <p>Сумма заказа: {{ order.totalSum.toFixed(2) }} руб.</p>
+                <ul>
+                    <li v-for="product in order.products" :key="product.id">
+                        {{ product.name }} - {{ product.cost }} руб.
+                    </li>
+                </ul>
+            </div>
+        </div>
     </section>
     <section class="logout container">
         <form @submit.prevent="logout" class="logout">

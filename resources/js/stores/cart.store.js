@@ -1,5 +1,8 @@
-// stores/cart.js
 import { defineStore } from "pinia";
+import { v4 as uuidv4 } from "uuid"; // Import the UUID function
+import { useUserStore } from "./user.store";
+
+const userStore = useUserStore();
 
 export const useCartStore = defineStore("cart", {
     state: () => ({
@@ -69,6 +72,24 @@ export const useCartStore = defineStore("cart", {
                 "deferredOrder",
                 JSON.stringify(this.deferredOrder)
             );
+        },
+        makeOrder(email) {
+            const order = {
+                id: uuidv4(), // Generate a UUID for the order ID
+                date: new Date().toISOString(), // Order date as ISO string
+                products: this.cart,
+                totalSum: this.cart.reduce(
+                    (acc, product) => acc + parseFloat(product.cost),
+                    0
+                ),
+                email,
+            };
+            userStore.addOrder(order);
+            this.clearCart(); // Clear the cart after making an order
+        },
+        clearCart() {
+            this.cart = [];
+            this.saveCart();
         },
     },
     getters: {

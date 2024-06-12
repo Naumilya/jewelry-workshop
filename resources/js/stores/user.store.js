@@ -1,3 +1,4 @@
+// useUserStore.js
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
@@ -8,6 +9,7 @@ export const useUserStore = defineStore("user", {
         createdAt: localStorage.getItem("createdAt")
             ? new Date(parseInt(localStorage.getItem("createdAt"), 10) * 1000)
             : null,
+        orders: JSON.parse(localStorage.getItem("orders") || "[]"),
     }),
     actions: {
         setUser(data) {
@@ -25,12 +27,14 @@ export const useUserStore = defineStore("user", {
             this.name = null;
             this.email = null;
             this.createdAt = null;
+            this.orders = null;
             localStorage.removeItem("name");
             localStorage.removeItem("email");
             localStorage.removeItem("token");
             localStorage.removeItem("createdAt");
+            localStorage.removeItem("orders");
         },
-        // ! Fixme
+        //! Fixme
         getFormattedDate() {
             if (!this.createdAt) return null;
             const day = this.createdAt.getDate().toString().padStart(2, "0");
@@ -39,6 +43,13 @@ export const useUserStore = defineStore("user", {
                 .padStart(2, "0");
             const year = this.createdAt.getFullYear();
             return `${day}.${month}.${year}`;
+        },
+
+        addOrder(order) {
+            const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+            orders.push(order);
+            localStorage.setItem("orders", JSON.stringify(orders));
+            this.orders = orders;
         },
     },
 });

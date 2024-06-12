@@ -36,7 +36,12 @@ const isAuthorized = computed(() => userStore.token !== null);
             </div>
             <div class="cart-summary">
                 <h3>Общая сумма заказа: {{ totalSum }} руб.</h3>
-                <router-link v-if="isAuthorized" class="button" to="/payment">
+                <router-link
+                    v-if="isAuthorized"
+                    class="button"
+                    @click="cartStore.makeOrder(userStore.email)"
+                    to="/payment"
+                >
                     Оформить заказ
                 </router-link>
                 <router-link v-else class="button" to="/login">
