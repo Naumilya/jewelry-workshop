@@ -1,14 +1,16 @@
 <?php
-
-use App\Http\Controllers\API\CategoryController;
-use App\Http\Controllers\NewsController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
+
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\API\PasswordResetController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\CustomJewelryController;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,10 +47,22 @@ Route::get('/catalog/{name}', [CategoryController::class, 'getByCategory']);
 // reset password
 Route::post('password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm']);
-
-
-
 Route::post('password/reset', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+//
 
 
+Route::post('/send-email', [CustomJewelryController::class, 'sendEmail']);
 
+Route::get('/test-email', function () {
+    $data = [
+        'name' => 'Test Name',
+        'email' => 'test@example.com',
+        'type' => 'repair',
+        'message' => 'Test message',
+        'images' => [],
+    ];
+
+    Mail::to('ilya32005@yandex.ru')->send(new \App\Mail\CustomJewelryMail($data));
+
+    return 'Email sent!';
+});
