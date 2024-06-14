@@ -43,8 +43,12 @@ Route::get('/product/{id}', [ProductController::class, 'show']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/catalog/{name}', [CategoryController::class, 'getByCategory']);
 // reset password
-
-
 Route::post('password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm']);
+
+
+
 Route::post('password/reset', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+
+
 

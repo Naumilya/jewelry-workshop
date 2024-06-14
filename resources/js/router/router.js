@@ -98,6 +98,17 @@ const routes = [
         },
     },
     {
+        path: "/reset-password/:token",
+        component: () => import("../Pages/Auth/ResetPasswordPage.vue"),
+        props: (route) => ({
+            token: route.params.token,
+            email: route.query.email,
+        }),
+        meta: {
+            layout: AuthLayout,
+        },
+    },
+    {
         path: "/profile",
         component: () => import("../Pages/ProfilePage.vue"),
         meta: {
