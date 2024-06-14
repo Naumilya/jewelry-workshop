@@ -8,6 +8,10 @@ import { useRouter } from "vue-router";
 
 const userStore = useUserStore();
 
+const recaptchaToken = ref("");
+const recaptchaContainer = ref(null);
+const recaptchaKey = ref(import.meta.env.VITE_GOOGLE_RECAPTCHA_KEY || "");
+
 const email = ref("");
 const password = ref("");
 
@@ -73,6 +77,14 @@ onMounted(() => {
     if (userStore.token) {
         router.push("/profile");
     }
+    if (recaptchaKey.value && recaptchaContainer.value) {
+        grecaptcha.ready(() => {
+            grecaptcha.render(recaptchaContainer.value, {
+                sitekey: recaptchaKey.value,
+                callback: (token) => (recaptchaToken.value = token),
+            });
+        });
+    }
 });
 </script>
 
@@ -100,6 +112,13 @@ onMounted(() => {
                 v-model="password"
             />
             <p class="form__error" v-if="passwordError">{{ passwordError }}</p>
+        </div>
+        <div class="form__item">
+            <div
+                data-theme="dark"
+                ref="recaptchaContainer"
+                class="g-recaptcha captcha"
+            ></div>
         </div>
         <p class="form__error" v-if="serverError">{{ serverError }}</p>
         <div class="form__actions">
