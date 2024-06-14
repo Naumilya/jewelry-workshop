@@ -29,7 +29,16 @@ class CustomJewelryMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('custom_message')
+        $mail = $this->markdown('custom_message')
             ->with('data', $this->data);
+
+        // Attach images as files
+        if (isset($this->data['images'])) {
+            foreach ($this->data['images'] as $image) {
+                $mail->attach($image);
+            }
+        }
+
+        return $mail;
     }
 }

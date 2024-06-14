@@ -23,16 +23,17 @@ class CustomJewelryController extends Controller
                 'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-
-            $data = $request->all();
-            $data['images'] = [];
-
+            // Store uploaded images temporarily
+            $uploadedImages = [];
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $file) {
                     $path = $file->store('public/images');
-                    $data['images'][] = asset(str_replace('public', 'storage', $path));
+                    $uploadedImages[] = storage_path('app/' . $path);
                 }
             }
+
+            $data = $request->all();
+            $data['images'] = $uploadedImages;
 
             Log::info('Sending email with data', $data);
 
