@@ -57,6 +57,7 @@ const login = async () => {
         const response = await axios.post("/api/login", {
             email: email.value,
             password: password.value,
+            recaptchaToken: recaptchaToken.value, // Передаем recaptchaToken
         });
 
         if (response.data.success) {

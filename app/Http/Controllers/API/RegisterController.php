@@ -39,6 +39,29 @@ class RegisterController extends Controller
 
     public function login(Request $request): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+            'recaptchaToken' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error', $validator->errors());
+        }
+
+        // Проверяем reCAPTCHA токен на сервере
+        $recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
+        $recaptchaSecret = env('GOOGLE_RECAPTCHA_SECRET'); // Замените на ваш секретный ключ reCAPTCHA
+        $recaptchaResponse = $request->input('recaptchaToken');
+
+        $recaptchaVerify = file_get_contents($recaptchaUrl . '?secret=' . $recaptchaSecret . '&response=' . $recaptchaResponse);
+        $recaptchaVerify = json_decode($recaptchaVerify);
+
+        if (!$recaptchaVerify->success) {
+            return $this->sendError('reCAPTCHA Error', ['captcha' => 'Invalid reCAPTCHA response.']);
+        }
+
+        // Проверяем авторизацию пользователя
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             if (!$user) {
