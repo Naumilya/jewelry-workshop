@@ -29,6 +29,7 @@ class RegisterController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
+        $success['id'] = $user->id;
         $success['token'] = $user->createToken('MyApp')->accessToken;
         $success['name'] = $user->name;
         $success['email'] = $user->email;
@@ -70,6 +71,7 @@ class RegisterController extends Controller
             if (!method_exists($user, 'createToken')) {
                 return $this->sendError('Method createToken does not exist.', ['error' => 'Method createToken does not exist.']);
             }
+            $success['id'] = $user->id;
             $success['token'] = $user->createToken('MyApp')->accessToken;
             $success['name'] = $user->name;
             $success['email'] = $user->email;

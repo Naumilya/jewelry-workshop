@@ -3,36 +3,52 @@ import { useCartStore } from "@/stores/cart.store.js";
 import { useUserStore } from "@/stores/user.store.js";
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
+import axios from "axios";
 
 const router = useRouter();
-const amount = ref("");
 const paymentStatus = ref(null);
 const transactionId = ref(null);
 
 const userStore = useUserStore();
 const cartStore = useCartStore();
 const userEmail = computed(() => userStore.email);
-const formattedTotalSum = computed(() => {
-    const totalSum = userStore.orders.reduce(
-        (acc, order) => acc + order.totalSum,
-        0
-    );
-    return `${totalSum} руб.`;
-});
 
-if (!userStore.token) {
-    router.push = "/cart";
+// Функция для вычисления общей суммы продуктов в корзине
+function calculateTotalSum(products) {
+    return products
+        .reduce((acc, product) => {
+            return acc + (product.cost ? parseFloat(product.cost) : 0);
+        }, 0)
+        .toFixed(2);
 }
 
+// Форматированная общая сумма продуктов в корзине
+const formattedTotalSum = computed(() => {
+    const totalSum = calculateTotalSum(cartStore.cart);
+    return totalSum + " руб.";
+});
+
+// Функция для создания заказа
 async function makeOrder(email) {
     try {
-        // здесь можно добавить логику отправки заказа на сервер или в профиль пользователя
-        console.log("Order made:", email);
-        // очищаем корзину
-        cartStore.clearCart();
-        router.push("/");
+        const response = await axios.post("/api/orders", {
+            user_id: userStore.id,
+            products: cartStore.cart, // Отправляем все продукты из корзины
+        });
+
+        if (response.data.status === "success") {
+            paymentStatus.value = "success";
+            transactionId.value = response.data.transactionId;
+            cartStore.clearCart(); // Очищаем корзину после успешной оплаты
+        } else {
+            paymentStatus.value = "failed";
+        }
     } catch (error) {
-        console.error("Payment failed:", error);
+        console.error("Error during order processing:", error);
+        alert(
+            "An error occurred while processing your order. Please try again."
+        );
+        paymentStatus.value = "failed";
     }
 }
 </script>
@@ -58,7 +74,7 @@ async function makeOrder(email) {
                 <router-link to="/">Перейти на главную</router-link>
             </h2>
             <h2 v-else>Оплата не удалась. Попробуйте снова.</h2>
-            <p>Transaction ID: {{ transactionId }}</p>
+            <p v-if="transactionId">Transaction ID: {{ transactionId }}</p>
         </div>
     </section>
 </template>

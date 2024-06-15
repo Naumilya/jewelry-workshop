@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from "@/stores/user.store.js";
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 const userStore = useUserStore();
 const router = useRouter();
@@ -15,6 +15,8 @@ onMounted(() => {
         router.push("/login");
     }
 });
+
+const orders = computed(() => userStore.orders || []);
 </script>
 
 <template>
@@ -36,26 +38,31 @@ onMounted(() => {
     </section>
     <section class="orders container">
         <h2>Мои заказы</h2>
-        <div class="orders__empty" v-if="userStore.orders.length === 0">
+        <div class="orders__empty" v-if="orders.length === 0">
             <span> Здесь пока что ничего нет... </span>
             <router-link to="/catalog">Перейти в Каталог</router-link>
         </div>
         <div class="orders__list" v-else>
-            <div
-                v-for="order in userStore.orders"
-                :key="order.id"
-                class="order"
-            >
+            <div v-for="order in orders" :key="order.id" class="order">
                 <h3>Номер заказа: {{ order.id }}</h3>
                 <p>
                     Дата заказа: {{ new Date(order.date).toLocaleDateString() }}
                 </p>
-                <p>Сумма заказа: {{ order.totalSum.toFixed(2) }} руб.</p>
+                <p>
+                    Сумма заказа:
+                    {{
+                        order.totalSum
+                            ? order.totalSum.toFixed(2)
+                            : "Нет данных"
+                    }}
+                    руб.
+                </p>
                 <ul>
                     <li v-for="product in order.products" :key="product.id">
                         {{ product.name }} - {{ product.cost }} руб.
                     </li>
                 </ul>
+                {{ order }}
             </div>
         </div>
     </section>

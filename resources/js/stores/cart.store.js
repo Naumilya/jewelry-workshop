@@ -1,8 +1,5 @@
+import axios from "axios";
 import { defineStore } from "pinia";
-import { v4 as uuidv4 } from "uuid"; // Import the UUID function
-import { useUserStore } from "./user.store";
-
-const userStore = useUserStore();
 
 export const useCartStore = defineStore("cart", {
     state: () => ({
@@ -73,19 +70,31 @@ export const useCartStore = defineStore("cart", {
                 JSON.stringify(this.deferredOrder)
             );
         },
-        makeOrder(email) {
-            const order = {
-                id: uuidv4(), // Generate a UUID for the order ID
-                date: new Date().toISOString(), // Order date as ISO string
-                products: this.cart,
-                totalSum: this.cart.reduce(
-                    (acc, product) => acc + parseFloat(product.cost),
-                    0
-                ),
-                email,
-            };
-            userStore.addOrder(order);
-            this.clearCart(); // Clear the cart after making an order
+        async makeOrder(email) {
+            try {
+                const promises = this.cart.map(async (product) => {
+                    const order = {
+                        user_id: userStore.id,
+                        product_id: product.id,
+                        order_date: new Date().toISOString().split("T")[0],
+                        delivery_date: new Date(
+                            Date.now() + 7 * 24 * 60 * 60 * 1000
+                        )
+                            .toISOString()
+                            .split("T")[0],
+                        total_cost: parseFloat(product.cost),
+                    };
+
+                    const response = await axios.post("/api/orders", order);
+                    return response.data;
+                });
+
+                await Promise.all(promises);
+                this.clearCart();
+                console.log("Orders sent to the database.");
+            } catch (error) {
+                console.error("Failed to send orders:", error);
+            }
         },
         clearCart() {
             this.cart = [];

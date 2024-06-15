@@ -39,7 +39,7 @@ Route::post('login', [RegisterController::class, 'login']);
 // }));
 
 
-Route::post('/payment', [PaymentController::class, 'processPayment']);
+Route::post('/orders', [PaymentController::class, 'processPayment']);
 Route::get('/product/{id}', [ProductController::class, 'show']);
 //categories
 Route::get('/categories', [CategoryController::class, 'index']);

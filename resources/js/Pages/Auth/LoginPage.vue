@@ -1,7 +1,6 @@
 <script setup>
 import { useUserStore } from "@/stores/user.store.js";
 import { Icon } from "@iconify/vue/dist/iconify.js";
-
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -57,20 +56,31 @@ const login = async () => {
         const response = await axios.post("/api/login", {
             email: email.value,
             password: password.value,
-            recaptchaToken: recaptchaToken.value, // Передаем recaptchaToken
+            recaptchaToken: recaptchaToken.value,
         });
 
         if (response.data.success) {
             userStore.setUser(response.data.data);
             router.push("/");
         } else {
-            serverError.value =
-                response.data.message ||
-                "Произошла ошибка. Попробуйте еще раз.";
+            handleLoginError();
         }
     } catch (error) {
-        serverError.value = "Произошла ошибка. Попробуйте еще раз.";
+        handleLoginError();
         console.error(error);
+    }
+};
+
+const handleLoginError = () => {
+    serverError.value = "Неправильный логин или пароль";
+
+    resetRecaptcha();
+};
+
+const resetRecaptcha = () => {
+    if (grecaptcha && recaptchaContainer.value) {
+        grecaptcha.reset();
+        recaptchaToken.value = "";
     }
 };
 
