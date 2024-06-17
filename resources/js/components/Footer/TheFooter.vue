@@ -40,15 +40,28 @@ import TheLogo from "@/components/TheLogo.vue";
 
 .footer {
     margin-top: 100px;
-}
 
-.footer__copyright {
-    border-top: 1px solid $color-gray;
-    margin-top: 35px;
-    padding: 25px 0;
-    font-size: 14px;
-    color: $color-gray;
-    display: flex;
-    justify-content: end;
+    &__navigation {
+        @media #{$mq-md} {
+            flex-direction: column;
+            gap: 30px;
+        }
+    }
+
+    &__menu {
+        @media #{$mq-sm} {
+            flex-direction: column;
+        }
+    }
+
+    &__copyright {
+        border-top: 1px solid $color-gray;
+        margin-top: 35px;
+        padding: 25px 0;
+        font-size: 14px;
+        color: $color-gray;
+        display: flex;
+        justify-content: end;
+    }
 }
 </style>

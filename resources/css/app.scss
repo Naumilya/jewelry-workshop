@@ -28,6 +28,9 @@ body {
 .content {
     margin-top: 100px;
     flex: 1 0 auto;
+    @media #{$mq-md} {
+        margin-top: 30px;
+    }
 }
 .footer {
     flex: 0 0 auto;

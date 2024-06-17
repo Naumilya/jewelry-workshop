@@ -1,10 +1,9 @@
 <script setup>
 import NewsGrid from "@/components/News/NewsGrid.vue";
 import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/vue";
-
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/vue";
 
 const modules = [Pagination, Autoplay];
 </script>
@@ -12,20 +11,15 @@ const modules = [Pagination, Autoplay];
 <template>
     <section class="hero container">
         <swiper
-            :pagination="{
-                clickable: true,
+            :pagination="{ clickable: true }"
+            :style="{
+                '--swiper-pagination-color': '#ffe766',
+                '--swiper-pagination-bullet-inactive-color': '#cfcece',
+                '--swiper-pagination-bullet-size': '10px',
+                '--swiper-pagination-bullet-horizontal-gap': '6px',
+                '--swiper-pagination-bottom': '0px',
             }"
-            :style="[
-                '--swiper-pagination-color: #ffe766',
-                '--swiper-pagination-bullet-inactive-color: #cfcece',
-                '--swiper-pagination-bullet-size: 10px',
-                '--swiper-pagination-bullet-horizontal-gap: 6px',
-                '--swiper-pagination-bottom: 0px;',
-            ]"
-            :autoplay="{
-                delay: 2500,
-                disableOnInteraction: false,
-            }"
+            :autoplay="{ delay: 2500, disableOnInteraction: false }"
             :modules="modules"
             class="mySwiper"
         >
@@ -43,9 +37,9 @@ const modules = [Pagination, Autoplay];
                         сайте, но если не найдете что-то чтобы вас зацепило, то
                         можете заказать украшение на заказ
                     </p>
-                    <router-link to="/catalog" class="hero__button">
-                        Каталог
-                    </router-link>
+                    <router-link to="/catalog" class="hero__button"
+                        >Каталог</router-link
+                    >
                 </div>
             </swiper-slide>
             <swiper-slide class="hero__slide">
@@ -57,9 +51,9 @@ const modules = [Pagination, Autoplay];
                         сайте, но если не найдете что-то чтобы вас зацепило, то
                         можете заказать украшение на заказ
                     </p>
-                    <router-link to="/catalog" class="hero__button">
-                        Каталог
-                    </router-link>
+                    <router-link to="/catalog" class="hero__button"
+                        >Каталог</router-link
+                    >
                 </div>
                 <img
                     src="/images/slides/photo-slider2.jpg"
@@ -81,9 +75,9 @@ const modules = [Pagination, Autoplay];
                         сайте, но если не найдете что-то чтобы вас зацепило, то
                         можете заказать украшение на заказ
                     </p>
-                    <router-link to="/catalog" class="hero__button">
-                        Каталог
-                    </router-link>
+                    <router-link to="/catalog" class="hero__button"
+                        >Каталог</router-link
+                    >
                 </div>
             </swiper-slide>
         </swiper>
@@ -112,7 +106,7 @@ const modules = [Pagination, Autoplay];
                 руки" в деревне Чуваки началась с глубокой традиции и уважения к
                 искусству ювелирного дела. Мастерская продолжает развивать
                 традиции и создавать уникальные украшения для местных жителей и
-                для праздников, которые проводятся в деревне
+                для праздников, которые проводятся в деревне.
             </p>
         </div>
     </section>
@@ -124,7 +118,9 @@ const modules = [Pagination, Autoplay];
 
 <style scoped lang="scss">
 @import "/resources/css/variables.scss";
+@import "/resources/css/media.scss";
 
+// Стили для всех разрешений
 .mySwiper {
     min-height: 381px;
     width: 100%;
@@ -134,6 +130,13 @@ const modules = [Pagination, Autoplay];
 .hero {
     &__photo {
         border-radius: $border-radius;
+        width: 100%;
+    }
+
+    &__title {
+        @media #{$mq-md} {
+            font-size: 24px;
+        }
     }
     &__description {
         margin-top: 18px;
@@ -141,12 +144,16 @@ const modules = [Pagination, Autoplay];
     &__button {
         margin-top: 36px;
     }
-
     &__slide {
         display: flex;
+        flex-direction: column;
         gap: 30px;
+        align-items: center;
+        @media #{$mq-sm-min} {
+            flex-direction: row;
+            align-items: flex-start;
+        }
     }
-
     &__button {
         display: inline-block;
         padding: 13px 22px;
@@ -158,13 +165,26 @@ const modules = [Pagination, Autoplay];
         font-family: Roboto, sans-serif;
         font-size: 16px;
     }
+    &__text {
+        text-align: center;
+        @media #{$mq-sm-min} {
+            text-align: left;
+        }
+    }
 }
 
 .about {
     display: flex;
-    gap: 124px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
     margin-top: 80px;
-
+    text-align: center;
+    @media #{$mq-md-min} {
+        flex-direction: row;
+        gap: 124px;
+        text-align: left;
+    }
     &__paragraph {
         margin-top: 17px;
     }
@@ -172,43 +192,32 @@ const modules = [Pagination, Autoplay];
 
 .news {
     margin-top: 110px;
-
     &__list {
         margin-top: 37px;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 30px;
-        row-gap: 60px;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        @media #{$mq-sm-min} {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
     }
-
     &__item {
         max-width: 570px;
     }
-
     &__image {
         border-radius: $border-radius;
         width: 100%;
+        margin-top: 14px;
     }
-
     &__header {
         display: flex;
         align-items: center;
         gap: 20px;
     }
-
     &__created {
         font-weight: 300;
     }
-
-    &__image {
-        margin-top: 14px;
-    }
-
-    &__copyright {
-        margin-top: 20px;
-        font-family: Raleway, sans-serif;
-    }
-
     &__theme {
         font-size: 24px;
         font-weight: normal;
@@ -218,12 +227,10 @@ const modules = [Pagination, Autoplay];
         padding: 4px 25px;
         background: $color-gold;
     }
-
     &__description {
         margin-top: 20px;
         font-family: Raleway;
     }
-
     &__button {
         font-family: Raleway;
         margin-top: 20px;
