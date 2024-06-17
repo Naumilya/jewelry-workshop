@@ -21,6 +21,15 @@ return new class extends Migration {
             $table->date('order_date');
             $table->date('delivery_date');
             $table->decimal('total_cost', 10, 2);
+            $table->enum('status', [
+                'new',
+                'pending',
+                'paid',
+                'hipped',
+                'delivered',
+                'cancelled',
+                'refunded',
+            ])->default('new');
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\API\PasswordResetController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\CustomJewelryController;
+use App\Http\Controllers\API\OrderController;
 use Illuminate\Support\Facades\Mail;
 
 /*
@@ -40,6 +41,8 @@ Route::post('login', [RegisterController::class, 'login']);
 
 
 Route::post('/orders', [PaymentController::class, 'processPayment']);
+Route::post('/orders/updateStatus', [OrderController::class, 'updateStatus']);
+//
 Route::get('/product/{id}', [ProductController::class, 'show']);
 //categories
 Route::get('/categories', [CategoryController::class, 'index']);

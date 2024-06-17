@@ -18,28 +18,25 @@ class PaymentController extends Controller
         DB::beginTransaction();
 
         try {
-
             $paymentStatus = 'success';
             $transactionId = 'FAKE' . rand(100000, 999999);
 
-            // Get user information
             $userId = $request->input('user_id');
             $products = $request->input('products');
             $orderDate = now()->toDateString();
             $deliveryDate = now()->addWeek()->toDateString();
 
+            $orderIds = [];
 
             foreach ($products as $product) {
                 $productId = $product['id'];
                 $totalCost = $product['cost'];
-
 
                 $master = Master::withCount('orders')
                     ->orderBy('orders_count', 'asc')
                     ->first();
                 $masterId = $master->id;
 
-                // Create and save the order
                 $order = new Order();
                 $order->user_id = $userId;
                 $order->product_id = $productId;
@@ -47,7 +44,10 @@ class PaymentController extends Controller
                 $order->order_date = $orderDate;
                 $order->delivery_date = $deliveryDate;
                 $order->total_cost = $totalCost;
+                $order->status = 'new';
                 $order->save();
+
+                $orderIds[] = $order->id;
             }
 
             DB::commit();
@@ -55,6 +55,7 @@ class PaymentController extends Controller
             return response()->json([
                 'status' => $paymentStatus,
                 'transactionId' => $transactionId,
+                'orderIds' => $orderIds,
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -66,4 +67,5 @@ class PaymentController extends Controller
             ], 500);
         }
     }
+
 }

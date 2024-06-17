@@ -2,9 +2,9 @@
 import CardProduct from "@/components/Card/CardProduct.vue";
 import { useCartStore } from "@/stores/cart.store.js";
 import { useUserStore } from "@/stores/user.store.js";
+import axios from "axios";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
-import axios from "axios";
 
 const cartStore = useCartStore();
 const userStore = useUserStore();
@@ -13,10 +13,9 @@ const router = useRouter();
 const cart = computed(() => cartStore.cart);
 const totalSum = computed(() => {
     const sum = cart.value.reduce(
-        (acc, product) => acc + parseFloat(product.cost),
+        (acc, product) => acc + (parseFloat(product.cost) || 0),
         0
     );
-
     return sum.toFixed(2);
 });
 
@@ -29,27 +28,26 @@ const handleOrder = async () => {
             return;
         }
 
-        const email = userStore.email;
-        const products = cart.value;
-        // const totalSum = totalSum.value;
-
         const response = await axios.post("/api/orders", {
             user_id: userStore.id,
-            products: products,
-            // total_sum: totalSum,
+            products: cart.value,
         });
 
         if (response.data.status === "success") {
-            // Clear the cart if the order is successful
-            cartStore.clearCart();
-            // Redirect to the payment page with transaction details
-            router.push({
-                path: "/payment",
-                query: {
-                    status: response.data.status,
-                    transactionId: response.data.transactionId,
-                },
-            });
+            const orderIds = response.data.orderIds;
+            // Переносим очистку корзины после перенаправления
+            router
+                .push({
+                    path: "/payment",
+                    query: {
+                        status: response.data.status,
+                        orderIds: orderIds.join(","),
+                        totalSum: totalSum.value,
+                    },
+                })
+                .then(() => {
+                    cartStore.clearCart();
+                });
         } else {
             console.error("Order creation failed:", response.data.message);
             alert("Order creation failed. Please try again.");
