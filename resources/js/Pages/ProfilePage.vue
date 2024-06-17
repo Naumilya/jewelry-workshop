@@ -42,26 +42,41 @@ const orders = computed(() => userStore.orders || []);
     <section class="orders container">
         <h2>Мои заказы</h2>
         <div class="orders__empty" v-if="orders.length === 0">
-            <span> Здесь пока что ничего нет... </span>
+            <span>Здесь пока что ничего нет...</span>
             <router-link to="/catalog">Перейти в Каталог</router-link>
         </div>
         <div class="orders__list" v-else>
             <div v-for="order in orders" :key="order.id" class="order">
-                <h3>Номер заказа: {{ order.id }}</h3>
-                <p>
-                    Дата заказа:
-                    {{ new Date(order.order_date).toLocaleDateString() }}
-                </p>
-                <p v-if="typeof order.total_cost === 'string'">
-                    Сумма заказа: {{ order.total_cost }} руб.
-                </p>
-                <p v-else>Сумма заказа: Нет данных</p>
-
-                <ul>
-                    <li v-for="product in order.products" :key="product.id">
-                        {{ product.name }} - {{ product.cost }} руб.
-                    </li>
-                </ul>
+                <div class="order-row">
+                    <div class="order-detail">
+                        <img
+                            :src="order.product.image_path"
+                            alt="Product Image"
+                            class="product-image"
+                        />
+                    </div>
+                    <div class="order-detail">
+                        <p class="order-text">
+                            <strong>Название:</strong> {{ order.product.name }}
+                        </p>
+                    </div>
+                    <div class="order-detail">
+                        <p class="order-text">
+                            <strong>Цена:</strong> {{ order.total_cost }} руб.
+                        </p>
+                    </div>
+                    <div class="order-detail">
+                        <p class="order-text">
+                            <strong>ID:</strong> {{ order.id }}
+                        </p>
+                    </div>
+                    <div class="order-detail">
+                        <p class="order-text">
+                            <strong>Статус:</strong> {{ order.status }}
+                        </p>
+                    </div>
+                </div>
+                <hr class="order-divider" />
             </div>
         </div>
     </section>
@@ -115,35 +130,46 @@ const orders = computed(() => userStore.orders || []);
 
     &__list {
         margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
     }
 
     .order {
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 8px;
+        margin-bottom: 10px;
+    }
 
-        h3 {
-            margin: 0;
-            font-size: 20px;
+    .order-row {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        overflow: hidden;
+    }
+
+    .order-detail {
+        flex: 1;
+        text-align: center;
+
+        img.product-image {
+            width: 100px;
+            height: auto;
+            border-radius: 8px;
         }
 
-        p {
+        .order-text {
             margin: 5px 0;
             font-size: 16px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 10px 0 0 0;
-
-            li {
-                font-size: 14px;
-            }
+        &:not(:last-child) {
+            border-right: 1px solid $color-gray;
         }
+    }
+
+    .order-divider {
+        width: 100%;
+        margin: 10px 0;
+        border: none;
     }
 }
 

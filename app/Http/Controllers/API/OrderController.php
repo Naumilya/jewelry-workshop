@@ -14,12 +14,14 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $userId = $request->query('userId');
-        $orders = Order::where('user_id', $userId)->get();
+        $orders = Order::with('product')->where('user_id', $userId)->get();
+
         return response()->json([
             'status' => 'success',
             'orders' => $orders,
         ]);
     }
+
 
 
     public function processPayment(Request $request)
