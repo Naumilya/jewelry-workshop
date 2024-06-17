@@ -1,3 +1,4 @@
+import axios from "axios";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
@@ -12,6 +13,34 @@ export const useUserStore = defineStore("user", {
         orders: JSON.parse(localStorage.getItem("orders") || "[]"),
     }),
     actions: {
+        async fetchOrdersByUserId(userId) {
+            if (this.token) {
+                try {
+                    const response = await axios.get(
+                        `/api/orders?userId=${userId}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${this.token}`,
+                            },
+                        }
+                    );
+                    if (response.data.status === "success") {
+                        this.orders = response.data.orders;
+                        localStorage.setItem(
+                            "orders",
+                            JSON.stringify(this.orders)
+                        );
+                    } else {
+                        console.error(
+                            "Failed to fetch orders:",
+                            response.data.message
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error fetching orders:", error);
+                }
+            }
+        },
         setUser(data) {
             this.id = data.id;
             this.name = data.name;

@@ -1,7 +1,8 @@
 <script setup>
 import { useUserStore } from "@/stores/user.store.js";
-import { onMounted, computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
+
 const userStore = useUserStore();
 const router = useRouter();
 
@@ -10,9 +11,11 @@ const logout = () => {
     router.push("/login");
 };
 
-onMounted(() => {
+onMounted(async () => {
     if (!userStore.token) {
         router.push("/login");
+    } else {
+        await userStore.fetchOrdersByUserId(userStore.id);
     }
 });
 
@@ -46,23 +49,19 @@ const orders = computed(() => userStore.orders || []);
             <div v-for="order in orders" :key="order.id" class="order">
                 <h3>Номер заказа: {{ order.id }}</h3>
                 <p>
-                    Дата заказа: {{ new Date(order.date).toLocaleDateString() }}
+                    Дата заказа:
+                    {{ new Date(order.order_date).toLocaleDateString() }}
                 </p>
-                <p>
-                    Сумма заказа:
-                    {{
-                        order.totalSum
-                            ? order.totalSum.toFixed(2)
-                            : "Нет данных"
-                    }}
-                    руб.
+                <p v-if="typeof order.total_cost === 'string'">
+                    Сумма заказа: {{ order.total_cost }} руб.
                 </p>
+                <p v-else>Сумма заказа: Нет данных</p>
+
                 <ul>
                     <li v-for="product in order.products" :key="product.id">
                         {{ product.name }} - {{ product.cost }} руб.
                     </li>
                 </ul>
-                {{ order }}
             </div>
         </div>
     </section>
@@ -112,6 +111,39 @@ const orders = computed(() => userStore.orders || []);
         justify-content: center;
         align-items: center;
         flex-direction: column;
+    }
+
+    &__list {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .order {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+
+        h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+
+            li {
+                font-size: 14px;
+            }
+        }
     }
 }
 

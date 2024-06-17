@@ -39,8 +39,8 @@ Route::post('login', [RegisterController::class, 'login']);
 //     Route::resource('products', ProductController::class);
 // }));
 
-
-Route::post('/orders', [PaymentController::class, 'processPayment']);
+Route::get('/orders', [OrderController::class, 'index']);
+Route::post('/orders', [OrderController::class, 'processPayment']);
 Route::post('/orders/updateStatus', [OrderController::class, 'updateStatus']);
 //
 Route::get('/product/{id}', [ProductController::class, 'show']);
