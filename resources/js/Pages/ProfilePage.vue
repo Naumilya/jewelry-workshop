@@ -141,6 +141,9 @@ const orders = computed(() => userStore.orders || []);
         align-items: center;
         padding: 15px;
         overflow: hidden;
+        width: max-content;
+        justify-content: space-between;
+        width: 100%;
     }
 
     .order-detail {
@@ -161,7 +164,7 @@ const orders = computed(() => userStore.orders || []);
             text-overflow: ellipsis;
         }
 
-        &:not(:last-child) {
+        &:not(:last-child, :first-child, :nth-child(2)) {
             border-right: 1px solid $color-gray;
         }
     }
