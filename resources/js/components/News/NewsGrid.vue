@@ -82,11 +82,13 @@ function dateFormat(date) {
     &__list {
         margin-top: 37px;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        column-gap: 30px;
-        row-gap: 60px;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        @media #{$mq-sm-min} {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
     }
-
     &__item {
         max-width: 570px;
     }

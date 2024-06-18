@@ -24,6 +24,8 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+@import "/resources/css/variables.scss";
+
 .main {
     width: 100%;
     height: 100%;
@@ -34,6 +36,10 @@ onMounted(() => {
     img {
         height: 100%;
         max-width: 50%;
+
+        @media #{$mq-lg} {
+            display: none;
+        }
     }
 }
 </style>

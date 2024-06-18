@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted } from "vue";
 import axios from "axios";
+import { onMounted, ref } from "vue";
 
 const categories = ref([]);
 
@@ -71,6 +71,12 @@ const getGridClass = (index) => {
         grid-template-rows: repeat(4, 1fr);
         grid-column-gap: 30px;
         grid-row-gap: 30px;
+
+        @media #{$mq-sm} {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+        }
     }
 
     &__item {
@@ -154,6 +160,21 @@ const getGridClass = (index) => {
     }
     .div10 {
         grid-area: 3 / 3 / 5 / 5;
+    }
+
+    @media #{$mq-sm} {
+        .div1,
+        .div2,
+        .div3,
+        .div4,
+        .div5,
+        .div6,
+        .div7,
+        .div8,
+        .div9,
+        .div10 {
+            grid-area: unset;
+        }
     }
 }
 </style>

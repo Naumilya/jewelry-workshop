@@ -84,12 +84,26 @@ const isInDeferredOrder = computed(() =>
     align-items: center;
     gap: 30px;
 
+    @media #{$mq-sm} {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
     &__title {
         font-size: 40px;
+
+        @media #{$mq-sm} {
+            font-size: 30px;
+        }
     }
 
     &__detail {
         margin-top: 20px;
+
+        @media #{$mq-sm} {
+            margin-top: 10px;
+        }
     }
 
     &__cost {
@@ -101,12 +115,20 @@ const isInDeferredOrder = computed(() =>
 
     &__text {
         max-width: 570px;
+
+        @media #{$mq-sm} {
+            max-width: 100%;
+        }
     }
 
     &__image {
         width: 100%;
         background: $color-gray;
         border-radius: $border-radius-small;
+
+        @media #{$mq-sm} {
+            width: 100%;
+        }
     }
 
     &__row {
@@ -114,12 +136,25 @@ const isInDeferredOrder = computed(() =>
         margin-top: 40px;
         justify-content: space-between;
         align-items: center;
+
+        @media #{$mq-sm} {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 20px;
+        }
     }
 
     &__icon {
         font-size: 50px;
         display: flex;
         gap: 20px;
+
+        @media #{$mq-sm} {
+            font-size: 40px;
+            gap: 15px;
+        }
+
         *:hover {
             cursor: pointer;
             color: $color-gold;

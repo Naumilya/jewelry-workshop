@@ -11,11 +11,17 @@
 </template>
 
 <style lang="scss" scoped>
+@import "/resources/css/variables.scss";
+
 .error {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    @media #{$mq-md} {
+        text-align: center;
+    }
 }
 
 h2 {

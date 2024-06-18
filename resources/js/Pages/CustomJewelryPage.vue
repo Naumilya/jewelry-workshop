@@ -130,13 +130,26 @@ const handleSubmit = async () => {
 
 <style lang="scss" scoped>
 @import "/resources/css/variables.scss";
-
 .custom-jewelry {
+    &__title {
+        @media #{$mq-sm} {
+            font-size: 32px;
+        }
+    }
+
     &__subtext {
         margin-top: 20px;
+
+        @media #{$mq-sm} {
+            font-size: 16px;
+        }
     }
     &__form {
         margin-top: 80px;
+
+        @media #{$mq-sm} {
+            margin-top: 40px;
+        }
     }
 }
 
@@ -144,23 +157,48 @@ const handleSubmit = async () => {
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    @media #{$mq-sm} {
+        gap: 20px;
+    }
+
     &__item {
         display: flex;
         gap: 10px;
+        align-items: center;
+
+        @media #{$mq-sm} {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
 
         &_text-area {
             flex-direction: column;
+
+            @media #{$mq-sm} {
+                gap: 10px;
+            }
         }
 
         &_buttons {
             display: flex;
             justify-content: space-between;
+
+            @media #{$mq-sm} {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     }
     &__label {
         font-size: 24px;
         width: 100%;
         max-width: fit-content;
+
+        @media #{$mq-sm} {
+            font-size: 18px;
+        }
     }
     &__input {
         color: $color-white;
@@ -170,8 +208,18 @@ const handleSubmit = async () => {
         border: none;
         outline: none;
         font-size: 24px;
+
+        @media #{$mq-sm} {
+            font-size: 18px;
+            padding: 10px;
+        }
+
         &::placeholder {
             font-size: 24px;
+
+            @media #{$mq-sm} {
+                font-size: 18px;
+            }
         }
     }
 
@@ -187,6 +235,11 @@ const handleSubmit = async () => {
         background-color: transparent;
         color: $color-white;
         font-size: 14px;
+
+        @media #{$mq-sm} {
+            padding: 10px;
+            font-size: 12px;
+        }
     }
 
     .image-uploads {

@@ -98,6 +98,12 @@ const orders = computed(() => userStore.orders || []);
         display: flex;
         align-items: center;
         gap: 130px;
+
+        @media #{$mq-sm} {
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
+        }
     }
 
     &__email {
@@ -107,6 +113,10 @@ const orders = computed(() => userStore.orders || []);
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        @media #{$mq-sm} {
+            font-size: 18px;
+        }
     }
 
     &__date {
@@ -126,6 +136,10 @@ const orders = computed(() => userStore.orders || []);
         justify-content: center;
         align-items: center;
         flex-direction: column;
+
+        @media #{$mq-sm} {
+            font-size: 18px;
+        }
     }
 
     &__list {
@@ -144,16 +158,30 @@ const orders = computed(() => userStore.orders || []);
         width: max-content;
         justify-content: space-between;
         width: 100%;
+
+        @media #{$mq-sm} {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 
     .order-detail {
         flex: 1;
         text-align: center;
 
+        @media #{$mq-sm} {
+            text-align: left;
+            width: 100%;
+        }
+
         img.product-image {
             width: 100px;
             height: auto;
             border-radius: 8px;
+
+            @media #{$mq-sm} {
+                width: 80px;
+            }
         }
 
         .order-text {
@@ -162,10 +190,20 @@ const orders = computed(() => userStore.orders || []);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+
+            @media #{$mq-sm} {
+                font-size: 14px;
+                white-space: normal;
+            }
         }
 
         &:not(:last-child, :first-child, :nth-child(2)) {
             border-right: 1px solid $color-gray;
+
+            @media #{$mq-sm} {
+                border-right: none;
+                border-bottom: 1px solid $color-gray;
+            }
         }
     }
 
@@ -180,5 +218,9 @@ const orders = computed(() => userStore.orders || []);
     margin-top: 40px;
     display: flex;
     justify-content: end;
+
+    @media #{$mq-sm} {
+        justify-content: center;
+    }
 }
 </style>

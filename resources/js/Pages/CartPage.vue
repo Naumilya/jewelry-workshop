@@ -88,10 +88,17 @@ const handleOrder = async () => {
 </template>
 
 <style lang="scss" scoped>
+@import "/resources/css/variables.scss";
+
 .cart-summary {
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media #{$mq-md} {
+        flex-direction: column;
+        gap: 30px;
+    }
 }
 </style>

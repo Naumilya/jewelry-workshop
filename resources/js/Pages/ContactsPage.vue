@@ -58,6 +58,11 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
     display: flex;
     gap: 75px;
 
+    @media #{$mq-sm} {
+        flex-direction: column;
+        gap: 20px;
+    }
+
     &__item {
         display: flex;
         flex-direction: column;
@@ -67,6 +72,10 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
         display: flex;
         gap: 30px;
 
+        @media #{$mq-sm} {
+            gap: 15px;
+        }
+
         *:hover {
             color: $color-gold;
         }
@@ -75,6 +84,10 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
     h2 {
         font-family: Raleway;
         font-weight: 400;
+
+        @media #{$mq-sm} {
+            font-size: 18px;
+        }
     }
 
     a {
@@ -83,6 +96,10 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
         font-size: 24px;
         color: $color-white;
         text-decoration: none;
+
+        @media #{$mq-sm} {
+            font-size: 16px;
+        }
     }
 }
 
@@ -90,6 +107,12 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
     margin-top: 85px;
     display: flex;
     gap: 90px;
+
+    @media #{$mq-sm} {
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 45px;
+    }
 
     &__map {
         border-radius: $border-radius-small;
@@ -99,6 +122,11 @@ import { Icon } from "@iconify/vue/dist/iconify.js";
         img {
             margin-top: 45px;
             max-height: 238px;
+
+            @media #{$mq-sm} {
+                margin-top: 20px;
+                max-height: 150px;
+            }
         }
     }
 }

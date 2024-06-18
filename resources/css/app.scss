@@ -54,6 +54,9 @@ body {
     column-gap: 30px;
     row-gap: 75px;
     flex-wrap: wrap;
+    @media #{$mq-sm} {
+        justify-content: center;
+    }
 }
 
 .menu {
@@ -110,6 +113,10 @@ body {
     gap: 20px;
     width: 370px;
 
+    @media #{$mq-lg} {
+        width: 100%;
+    }
+
     &__item {
         display: flex;
         flex-direction: column;
@@ -135,6 +142,8 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        text-wrap: nowrap;
+        gap: 10px;
 
         .form__item {
             text-align: right;
