@@ -37,8 +37,8 @@ class NewsResource extends ModelResource
                 Text::make('copyright', 'copyright'),
                 Text::make('description', 'description'),
                 Text::make('image_path', 'image_path'),
-                Date::make('created_at', 'created_at'),
-                Date::make('updated_at', 'updated_at'),
+                // Date::make('created_at', 'created_at'),
+                // Date::make('updated_at', 'updated_at'),
             ]),
         ];
     }

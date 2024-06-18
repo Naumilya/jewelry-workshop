@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use App\Enums\MaterialNameEnum;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Material;
+use App\Models\Product;
 
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
-use MoonShine\Fields\Date;
-use MoonShine\Fields\Enum;
+use MoonShine\Fields\Number;
+use MoonShine\Fields\Text;
 
 /**
- * @extends ModelResource<Material>
+ * @extends ModelResource<Product>
  */
-class MaterialResource extends ModelResource
+class ProductResource extends ModelResource
 {
-    protected string $model = Material::class;
+    protected string $model = Product::class;
 
-    protected string $title = 'Materials';
+    protected string $title = 'Products';
 
     /**
      * @return list<MoonShineComponent|Field>
@@ -33,15 +32,16 @@ class MaterialResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
-                Enum::make('name')->attach(MaterialNameEnum::class),
-                // Date::make('created_at', 'created_at'),
-                // Date::make('updated_at', 'updated_at'),
+                Text::make('name', 'name'),
+                Text::make('detail', 'detail'),
+                Number::make('cost', 'cost'),
+                Text::make('image_path', 'image_path'),
             ]),
         ];
     }
 
     /**
-     * @param Material $item
+     * @param Product $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

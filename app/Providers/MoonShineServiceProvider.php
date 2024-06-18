@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Product;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\MasterResource;
 use App\MoonShine\Resources\MaterialResource;
 use App\MoonShine\Resources\NewsResource;
 use App\MoonShine\Resources\OrderResource;
+use App\MoonShine\Resources\Product_CategoryResource;
+use App\MoonShine\Resources\Product_MaterialResource;
+use App\MoonShine\Resources\Product_StoneResource;
+use App\MoonShine\Resources\ProductResource;
+use App\MoonShine\Resources\StoneResource;
+use App\MoonShine\Resources\UserResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -22,6 +29,21 @@ use Closure;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
+
+    public function boot(): void
+    {
+        parent::boot();
+
+        moonshineColors()
+            ->background('#171717')
+            ->content('#171717')
+            ->tableRow('#171717')
+            ->dividers('#cfcece')
+            ->borders('#cfcece')
+            ->buttons('#171717')
+            ->primary('#171717')
+            ->secondary('#FFE766');
+    }
     /**
      * @return list<ResourceContract>
      */
@@ -76,6 +98,32 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     static fn() => __('orders'),
                     new OrderResource()
                 ),
+                MenuGroup::make(static fn() => __('products'), [
+                    MenuItem::make(
+                        static fn() => __('products'),
+                        new ProductResource()
+                    ),
+                    MenuItem::make(
+                        static fn() => __('product__categories'),
+                        new Product_CategoryResource()
+                    ),
+                    MenuItem::make(
+                        static fn() => __('product__materials'),
+                        new Product_MaterialResource()
+                    ),
+                    MenuItem::make(
+                        static fn() => __('product__stones'),
+                        new Product_StoneResource()
+                    ),
+                ]),
+                MenuItem::make(
+                    static fn() => __('stones'),
+                    new StoneResource()
+                ),
+                MenuItem::make(
+                    static fn() => __('users'),
+                    new UserResource()
+                ),
             ]),
         ];
     }
@@ -85,6 +133,12 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
      */
     protected function theme(): array
     {
-        return [];
+        return [
+            // 'colors' => [
+            //     'body' => '#171717',
+            //     'primary' => '#171717',
+            //     'secondary' => '#ffe766',
+            // ],
+        ];
     }
 }

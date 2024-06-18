@@ -35,8 +35,8 @@ class CategoryResource extends ModelResource
                 Text::make("name", "name"),
                 Text::make("name_ru", "name_ru"),
                 Text::make("description", "description"),
-                Date::make('created_at', 'created_at'),
-                Date::make('updated_at', 'updated_at'),
+                // Date::make('created_at', 'created_at'),
+                // Date::make('updated_at', 'updated_at'),
             ]),
         ];
     }

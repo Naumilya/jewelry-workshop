@@ -36,8 +36,8 @@ class MasterResource extends ModelResource
                 ID::make()->sortable(),
                 Text::make("name", "name"),
                 Enum::make("specialization")->attach(SpecializationEnum::class),
-                Date::make('created_at', 'created_at'),
-                Date::make('updated_at', 'updated_at'),
+                // Date::make('created_at', 'created_at'),
+                // Date::make('updated_at', 'updated_at'),
             ]),
         ];
     }
