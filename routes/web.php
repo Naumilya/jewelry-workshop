@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 
@@ -18,5 +19,6 @@ Route::get('/{vue_capture?}', function () {
     return view('welcome');
 })->where('vue_capture', '[\/\w\.-]*');
 
+Route::get('/products/master/{id}', [ProductController::class, 'productsByMaster']);
 
 

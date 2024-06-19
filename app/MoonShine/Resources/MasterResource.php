@@ -15,6 +15,7 @@ use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Enum;
+use MoonShine\Fields\Select;
 use MoonShine\Fields\Text;
 
 /**
@@ -41,6 +42,22 @@ class MasterResource extends ModelResource
             ]),
         ];
     }
+
+    public function filters(): array
+    {
+        return [
+            Select::make('Материал', 'specialization')
+                ->options(
+                    [
+                        'золото' => 'золото',
+                        'платина' => 'платина',
+                        'серебро' => 'серебро',
+                        'алмаз' => 'алмаз'
+                    ]
+                )->nullable(),
+        ];
+    }
+
 
     /**
      * @param Master $item

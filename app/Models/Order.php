@@ -9,6 +9,11 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'master_id',
+        'user_id'
+    ];
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');

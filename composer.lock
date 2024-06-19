@@ -1182,16 +1182,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.48.12",
+            "version": "v10.48.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "590afea38e708022662629fbf5184351fa82cf08"
+                "reference": "2c6816d697a4362c09c066118addda251b70b98a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/590afea38e708022662629fbf5184351fa82cf08",
-                "reference": "590afea38e708022662629fbf5184351fa82cf08",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2c6816d697a4362c09c066118addda251b70b98a",
+                "reference": "2c6816d697a4362c09c066118addda251b70b98a",
                 "shasum": ""
             },
             "require": {
@@ -1385,7 +1385,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-05-28T15:46:19+00:00"
+            "time": "2024-06-18T16:46:35+00:00"
         },
         {
             "name": "laravel/passport",
@@ -1465,16 +1465,16 @@
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.1.23",
+            "version": "v0.1.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "9bc4df7c699b0452c6b815e64a2d84b6d7f99400"
+                "reference": "409b0b4305273472f3754826e68f4edbd0150149"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/9bc4df7c699b0452c6b815e64a2d84b6d7f99400",
-                "reference": "9bc4df7c699b0452c6b815e64a2d84b6d7f99400",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/409b0b4305273472f3754826e68f4edbd0150149",
+                "reference": "409b0b4305273472f3754826e68f4edbd0150149",
                 "shasum": ""
             },
             "require": {
@@ -1517,9 +1517,9 @@
             "description": "Add beautiful and user-friendly forms to your command-line applications.",
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.1.23"
+                "source": "https://github.com/laravel/prompts/tree/v0.1.24"
             },
-            "time": "2024-05-27T13:53:20+00:00"
+            "time": "2024-06-17T13:58:22+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -2691,16 +2691,16 @@
         },
         {
             "name": "moonshine/moonshine",
-            "version": "2.16.0",
+            "version": "2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/moonshine.git",
-                "reference": "3a6b2c78998ac820a2a6ac90b484b4a2af284259"
+                "reference": "4317010f5187cf54f55d0cf99cc3618a894d64c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/3a6b2c78998ac820a2a6ac90b484b4a2af284259",
-                "reference": "3a6b2c78998ac820a2a6ac90b484b4a2af284259",
+                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/4317010f5187cf54f55d0cf99cc3618a894d64c4",
+                "reference": "4317010f5187cf54f55d0cf99cc3618a894d64c4",
                 "shasum": ""
             },
             "require": {
@@ -2776,7 +2776,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-06-17T07:13:39+00:00"
+            "time": "2024-06-18T14:21:59+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -3350,24 +3350,24 @@
         },
         {
             "name": "paragonie/constant_time_encoding",
-            "version": "v2.7.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "52a0d99e69f56b9ec27ace92ba56897fe6993105"
+                "reference": "df1e7fde177501eee2037dd159cf04f5f301a512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/52a0d99e69f56b9ec27ace92ba56897fe6993105",
-                "reference": "52a0d99e69f56b9ec27ace92ba56897fe6993105",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/df1e7fde177501eee2037dd159cf04f5f301a512",
+                "reference": "df1e7fde177501eee2037dd159cf04f5f301a512",
                 "shasum": ""
             },
             "require": {
-                "php": "^7|^8"
+                "php": "^8"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6|^7|^8|^9",
-                "vimeo/psalm": "^1|^2|^3|^4"
+                "phpunit/phpunit": "^9",
+                "vimeo/psalm": "^4|^5"
             },
             "type": "library",
             "autoload": {
@@ -3413,7 +3413,7 @@
                 "issues": "https://github.com/paragonie/constant_time_encoding/issues",
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
-            "time": "2024-05-08T12:18:48+00:00"
+            "time": "2024-05-08T12:36:18+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3542,20 +3542,20 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.37",
+            "version": "3.0.38",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "cfa2013d0f68c062055180dd4328cc8b9d1f30b8"
+                "reference": "b18b8788e51156c4dd97b7f220a31149a0052067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/cfa2013d0f68c062055180dd4328cc8b9d1f30b8",
-                "reference": "cfa2013d0f68c062055180dd4328cc8b9d1f30b8",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/b18b8788e51156c4dd97b7f220a31149a0052067",
+                "reference": "b18b8788e51156c4dd97b7f220a31149a0052067",
                 "shasum": ""
             },
             "require": {
-                "paragonie/constant_time_encoding": "^1|^2",
+                "paragonie/constant_time_encoding": "^1|^2|^3",
                 "paragonie/random_compat": "^1.4|^2.0|^9.99.99",
                 "php": ">=5.6.1"
             },
@@ -3632,7 +3632,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.37"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.38"
             },
             "funding": [
                 {
@@ -3648,7 +3648,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-03T02:14:58+00:00"
+            "time": "2024-06-17T10:11:32+00:00"
         },
         {
             "name": "psr/clock",
@@ -7210,16 +7210,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.16.0",
+            "version": "v1.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "1b3a3dc5bc6a81ff52828ba7277621f1d49d6d98"
+                "reference": "9266a47f1b9231b83e0cfd849009547329d871b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/1b3a3dc5bc6a81ff52828ba7277621f1d49d6d98",
-                "reference": "1b3a3dc5bc6a81ff52828ba7277621f1d49d6d98",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/9266a47f1b9231b83e0cfd849009547329d871b1",
+                "reference": "9266a47f1b9231b83e0cfd849009547329d871b1",
                 "shasum": ""
             },
             "require": {
@@ -7230,13 +7230,13 @@
                 "php": "^8.1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.57.1",
-                "illuminate/view": "^10.48.10",
-                "larastan/larastan": "^2.9.6",
+                "friendsofphp/php-cs-fixer": "^3.59.3",
+                "illuminate/view": "^10.48.12",
+                "larastan/larastan": "^2.9.7",
                 "laravel-zero/framework": "^10.4.0",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/termwind": "^1.15.1",
-                "pestphp/pest": "^2.34.7"
+                "pestphp/pest": "^2.34.8"
             },
             "bin": [
                 "builds/pint"
@@ -7272,20 +7272,20 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2024-05-21T18:08:25+00:00"
+            "time": "2024-06-18T16:50:05+00:00"
         },
         {
             "name": "laravel/sail",
-            "version": "v1.29.2",
+            "version": "v1.29.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "a8e4e749735ba2f091856eafeb3f99db8cd6b621"
+                "reference": "e35b3ffe1b9ea598246d7e99197ee8799f6dc2e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/a8e4e749735ba2f091856eafeb3f99db8cd6b621",
-                "reference": "a8e4e749735ba2f091856eafeb3f99db8cd6b621",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/e35b3ffe1b9ea598246d7e99197ee8799f6dc2e5",
+                "reference": "e35b3ffe1b9ea598246d7e99197ee8799f6dc2e5",
                 "shasum": ""
             },
             "require": {
@@ -7335,7 +7335,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-05-16T21:39:11+00:00"
+            "time": "2024-06-12T16:24:41+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -8017,16 +8017,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.21",
+            "version": "10.5.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "ac837816fa52078f7a5e17ed774f256a72a51af6"
+                "reference": "8afb89b399b17c2ce2618015bdc9f81a117c5ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ac837816fa52078f7a5e17ed774f256a72a51af6",
-                "reference": "ac837816fa52078f7a5e17ed774f256a72a51af6",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8afb89b399b17c2ce2618015bdc9f81a117c5ee1",
+                "reference": "8afb89b399b17c2ce2618015bdc9f81a117c5ee1",
                 "shasum": ""
             },
             "require": {
@@ -8098,7 +8098,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.21"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.22"
             },
             "funding": [
                 {
@@ -8114,7 +8114,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-15T09:13:15+00:00"
+            "time": "2024-06-19T05:29:34+00:00"
         },
         {
             "name": "sebastian/cli-parser",

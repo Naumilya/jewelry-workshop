@@ -9,6 +9,11 @@ class Product_Material extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'master_id',
+    ];
+
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');

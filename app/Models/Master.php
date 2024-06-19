@@ -9,6 +9,10 @@ class Master extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id',
+    ];
+
     public function orders()
     {
         return $this->hasMany(Order::class);

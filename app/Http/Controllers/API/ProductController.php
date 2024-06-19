@@ -45,4 +45,13 @@ class ProductController extends Controller
         }
         return $this->sendResponse(new ProductResource($product), 'Product retrieved successfully');
     }
+
+    public function productsByMaster($masterId)
+    {
+        $products = Product::whereHas('orders', function ($query) use ($masterId) {
+            $query->where('master_id', $masterId);
+        })->get();
+
+        return view('products.index', compact('products'));
+    }
 }
