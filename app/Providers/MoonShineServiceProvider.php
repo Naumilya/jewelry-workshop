@@ -5,6 +5,16 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Product;
+use App\MoonShine\Pages\Query1;
+use App\MoonShine\Pages\Query10;
+use App\MoonShine\Pages\Query2;
+use App\MoonShine\Pages\Query3;
+use App\MoonShine\Pages\Query4;
+use App\MoonShine\Pages\Query5;
+use App\MoonShine\Pages\Query6;
+use App\MoonShine\Pages\Query7;
+use App\MoonShine\Pages\Query8;
+use App\MoonShine\Pages\Query9;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\MasterResource;
 use App\MoonShine\Resources\MaterialResource;
@@ -124,6 +134,18 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     static fn() => __('users'),
                     new UserResource()
                 ),
+                MenuGroup::make(static fn() => __('Queries'), [
+                    MenuItem::make('Query1', Query1::make('Query1', 'query1')),
+                    MenuItem::make('Query2', Query2::make('Query2', 'query2')),
+                    MenuItem::make('Query3', Query3::make('Query3', 'query3')),
+                    MenuItem::make('Query4', Query4::make('Query4', 'query4')),
+                    MenuItem::make('Query5', Query5::make('Query5', 'query5')),
+                    MenuItem::make('Query6', Query6::make('Query6', 'query6')),
+                    MenuItem::make('Query7', Query7::make('Query7', 'query7')),
+                    MenuItem::make('Query8', Query8::make('Query8', 'query8')),
+                    MenuItem::make('Query9', Query9::make('Query9', 'query9')),
+                    MenuItem::make('Query10', Query10::make('Query10', 'query10')),
+                ]),
             ]),
         ];
     }

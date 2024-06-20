@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use MoonShine\Resources\Resource;
+use MoonShine\Http\Request\MoonShineRequest;
 use App\Enums\OrderStatusEnum;
 use App\Models\Master;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
+use MoonShine\Http\Requests\MoonShineFormRequest;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
@@ -21,6 +26,7 @@ use MoonShine\Fields\Enum;
 use MoonShine\Fields\Number;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Select;
+use MoonShine\Filters\Filter;
 use MoonShine\Fields\Text;
 
 /**
@@ -70,16 +76,6 @@ class OrderResource extends ModelResource
 
     public function filters(): array
     {
-        $currentYear = (int) date('Y');
-
-        // Получаем список всех заказов и извлекаем года из даты заказа
-        $years = Order::pluck('order_date')->map(function ($date) {
-            return (int) date('Y', strtotime($date));
-        })->unique()->sort()->toArray();
-
-        // По умолчанию выбираем последний (наибольший) год в списке
-        $defaultYear = end($years);
-
         return [
             Select::make('Пользователь', 'user_id')
                 ->options(
@@ -92,12 +88,21 @@ class OrderResource extends ModelResource
                         ->all()
                 )->nullable(),
             DateRange::make('Дата выполнения заказа', 'delivery_date'),
-            Date::make('Дата создания заказа', 'order_date')
-                ->format('y-m-d')
-                ->placeholder('Выберите год')
-                ->nullable(),
+            Date::make('Дата создания заказа', 'order_date_before')
+                ->placeholder('Выберите дату')
+                ->nullable()
+                ->onChangeMethod('filterByOrderDateAfter'),
+            Number::make('Сумма заказов больше чем', 'total_order_sum')
         ];
     }
+
+    // public function filterByOrderDateAfter(MoonShineRequest $request): void
+    // {
+    //     $year = $request->input('order_date_after');
+    //     $this->query->whereYear('created_at', '>', $year);
+    // }
+
+
 
 
     /**
