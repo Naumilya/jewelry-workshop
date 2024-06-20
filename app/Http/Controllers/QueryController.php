@@ -13,6 +13,11 @@ use App\MoonShine\Pages\Query2;
 use App\MoonShine\Pages\Query3;
 use App\MoonShine\Pages\Query4;
 use App\MoonShine\Pages\Query5;
+use App\MoonShine\Pages\Query6;
+use App\MoonShine\Pages\Query7;
+use App\MoonShine\Pages\Query8;
+use App\MoonShine\Pages\Query9;
+use App\MoonShine\Pages\Query10;
 use Illuminate\Support\Facades\DB;
 
 class QueryController extends Controller
@@ -145,23 +150,44 @@ class QueryController extends Controller
      * @param int $minTotalCost
      * @return \Illuminate\Support\Collection
      */
-    public function query6($minTotalCost)
-    {
-        return User::whereHas('orders', function ($query) use ($minTotalCost) {
-            $query->where('total_cost', '>', $minTotalCost);
-        })->get();
-    }
 
+    public function query6(Request $request)
+    {
+        $totalOrders = $request->input('total_orders', 0);
+
+        $clients = DB::table('users')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('users.id', 'users.name', DB::raw('SUM(orders.total_cost) as total_amount'))
+            ->groupBy('users.id', 'users.name')
+            ->havingRaw('SUM(orders.total_cost) > ?', [$totalOrders])
+            ->get();
+
+        return Query6::make('Запрос 6', 'query6')
+            ->setContentView('queries/query6', ['clients' => $clients])
+            ->setBreadcrumbs(['#' => 'Запрос 6']);
+    }
     /**
      * Get list of all products with release year greater than a specified year
      *
      * @param int $year
      * @return \Illuminate\Support\Collection
      */
-    public function query7($year)
+    public function query7(Request $request)
     {
-        return Product::whereYear('created_at', '>', $year)->get();
+        $orderDate = $request->input('order_date', '');
+
+        $products = DB::table('products')
+            ->join('orders', 'products.id', '=', 'orders.product_id')
+            ->where('orders.order_date', '>', $orderDate)
+            ->select('products.id', 'products.name', 'orders.order_date')
+            ->get();
+
+        return Query7::make('Запрос 7', 'query7')
+            ->setContentView('queries/query7', ['products' => $products])
+            ->setBreadcrumbs(['#' => 'Запрос 7']);
     }
+
+
 
     /**
      * Get list of all orders with delivery date within a specified range
@@ -170,9 +196,18 @@ class QueryController extends Controller
      * @param string $endDate
      * @return \Illuminate\Support\Collection
      */
-    public function query8($startDate, $endDate)
+    public function query8(Request $request)
     {
-        return Order::whereBetween('delivery_date', [$startDate, $endDate])->get();
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        $orders = DB::table('orders')
+            ->whereBetween('order_date', [$start_date, $end_date])
+            ->get();
+
+        return Query8::make('Запрос 8', 'query8')
+            ->setContentView('queries/query8', ['orders' => $orders])
+            ->setBreadcrumbs(['#' => 'Запрос 8']);
     }
 
     /**
@@ -180,23 +215,47 @@ class QueryController extends Controller
      *
      * @return \Illuminate\Support\Collection
      */
-    public function query9()
-    {
-        return Product::select('materials.name', DB::raw('count(*) as total_products'))
-            ->join('product__materials', 'products.id', '=', 'product__materials.product_id')
-            ->join('materials', 'product__materials.material_id', '=', 'materials.id')
-            ->groupBy('materials.name')
-            ->get();
-    }
-
     /**
      * Get list of all masters with a specific specialization
      *
      * @param string $specialization
      * @return \Illuminate\Support\Collection
      */
-    public function query10($specialization)
+    public function query9(Request $request)
     {
-        return Master::where('specialization', $specialization)->get();
+        $material_id = $request->input('material_id', 0);
+
+        $productsByMaterial = DB::table('products')
+            ->join('product__materials', 'products.id', '=', 'product__materials.product_id')
+            ->join('materials', 'product__materials.material_id', '=', 'materials.id')
+            ->select('materials.name as material_name', DB::raw('COUNT(products.id) as total_products'))
+            ->groupBy('materials.name');
+
+        if ($material_id) {
+            $productsByMaterial->where('materials.id', '=', $material_id);
+        }
+
+        $productsByMaterial = $productsByMaterial->get();
+
+        return Query9::make('Запрос 9', 'query9')
+            ->setContentView('queries/query9', ['productsByMaterial' => $productsByMaterial])
+            ->setBreadcrumbs(['#' => 'Запрос 9']);
     }
+
+
+    public function query10(Request $request)
+    {
+        // Получаем выбранную специализацию мастера из запроса
+        $specialization = $request->input('specialization');
+
+        // Запрос для выбора мастеров по специализации
+        $masters = DB::table('masters')
+            ->where('specialization', $specialization)
+            ->get();
+
+        return Query10::make('Запрос 10', 'query10')
+            ->setContentView('queries/query10', ['masters' => $masters, 'specialization' => $specialization], )
+            ->setBreadcrumbs(['#' => 'Запрос 10']);
+    }
+
 }

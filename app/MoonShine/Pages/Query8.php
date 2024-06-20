@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages;
 
+use MoonShine\Components\FormBuilder;
 use MoonShine\Pages\Page;
 use MoonShine\Components\MoonShineComponent;
+use MoonShine\Decorations\Block;
+use MoonShine\Decorations\TextBlock;
+use MoonShine\Fields\Date;
 
 class Query8 extends Page
 {
@@ -28,7 +32,21 @@ class Query8 extends Page
      * @return list<MoonShineComponent>
      */
     public function components(): array
-	{
-		return [];
-	}
+    {
+        $action = '/admin/page/query8';
+
+        return [
+            TextBlock::make("Получить список всех заказов за определенный период времени", ''),
+            Block::make([
+                FormBuilder::make()
+                    ->action($action)
+                    ->method('POST')
+                    ->fields([
+                        Date::make('Начальная дата', 'start_date')->required(),
+                        Date::make('Конечная дата', 'end_date')->required(),
+                    ])
+                    ->submit(label: 'Сделать запрос', attributes: ['class' => 'btn-success'])
+            ])
+        ];
+    }
 }

@@ -49,14 +49,6 @@ class ProductResource extends ModelResource
         ];
     }
 
-    // public function filterQuery($query, $request)
-    // {
-    //     if ($request->input('cost_gte')) {
-    //         $query->where('cost', '>=', $request->input('cost'));
-    //     }
-
-    //     return $query;
-    // }
 
     /**
      * @param Product $item
