@@ -30,6 +30,7 @@ return new class extends Migration {
                 'cancelled',
                 'refunded',
             ])->default('new');
+
             $table->timestamps();
         });
     }
